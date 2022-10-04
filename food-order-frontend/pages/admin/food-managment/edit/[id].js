@@ -13,7 +13,8 @@ export default function FoodElement({ pizza }) {
   );
   console.log(`${routes.IMAGE}/${selectedImage}`);
   function setPrice(price) {
-    return parseFloat(price) !== NaN ? price : parseFloat(1);
+    price = parseFloat(price);
+    return !isNaN(price) ? price : parseFloat(1);
   }
 
   return (
