@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import { routes } from "../../routes";
 import FoodList from "../food/FoodList";
-import Pagination from "./pagination";
-
+import Image from "next/image";
+// loading="lazy"
 export default function AdminTable({ pizzaList }) {
   let columns = ["item", "name", "price", "description"];
   console.log(pizzaList);
@@ -29,8 +29,8 @@ export default function AdminTable({ pizzaList }) {
               </tr>
             </thead>
             <tbody className="bg-white divide-y ">
-              {pizzaList.map((pizza) => (
-                <tr className="text-gray-700 ">
+              {pizzaList?.map((pizza) => (
+                <tr key={pizza.id} className="text-gray-700 ">
                   <td className="px-4 py-3">
                     <div className="flex items-center text-sm">
                       <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">
@@ -38,7 +38,8 @@ export default function AdminTable({ pizzaList }) {
                           className="object-cover w-full h-full rounded-full"
                           src={`${routes.IMAGE}/${pizza.food_image}`}
                           alt=""
-                          loading="lazy"
+                          width={500}
+                          height={500}
                         />
                         <div
                           className="absolute inset-0 rounded-full shadow-inner"

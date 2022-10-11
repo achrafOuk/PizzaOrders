@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { useState } from "react";
 import AdminNavbar from "../../../../components/dashboard/navbar";
 import AdminSidebar from "../../../../components/dashboard/sidebar";
@@ -8,6 +9,8 @@ export default function FoodElement({ pizza }) {
   let [price, usePrie] = useState(pizza.food_price);
   let [name, useName] = useState(pizza.food_name);
   let [description, useDescription] = useState(pizza.food_description);
+  let route = useRouter();
+  let id = route.query["id"];
   const [selectedImage, setSelectedImage] = useState(
     `${routes.IMAGE}/${pizza.food_image}`
   );
@@ -16,6 +19,41 @@ export default function FoodElement({ pizza }) {
     price = parseFloat(price);
     return !isNaN(price) ? price : parseFloat(1);
   }
+  async function edit_element(event) {
+    event.preventDefault();
+    let formdata = new FormData();
+    formdata.append("food_name", name);
+    formdata.append("food_price", price);
+    formdata.append("food_description", description);
+    console.log(
+      selectedImage,
+      selectedImage !== `${routes.IMAGE}/${pizza.food_image}`
+    );
+    if (typeof selectedImage === "object") {
+      console.log(selectedImage);
+      console.log(typeof selectedImage);
+      formdata.append(
+        "food_image",
+        selectedImage,
+        "/C:/Users/user/Documents/pizza.png"
+      );
+    }
+    let requestOptions = {
+      method: "POST",
+      body: formdata,
+      redirect: "follow",
+    };
+    await fetch(`${routes.UPDATE_FOOD}/${id}`, requestOptions)
+      .then((res) => {
+        route.push("/admin/food-managment/");
+        console.log(res);
+        return res;
+      })
+      .catch((err) => {
+        console.log(err);
+        return err;
+      });
+  }
 
   return (
     <div className="flex h-screen bg-gray-50 ">
@@ -23,7 +61,7 @@ export default function FoodElement({ pizza }) {
       <div className="flex flex-col flex-1 w-full">
         <AdminSidebar></AdminSidebar>
         <form
-          onSubmit={(event) => add_element(event)}
+          onSubmit={(event) => edit_element(event)}
           className="mt-[5%] h-full pb-16 overflow-y-auto"
         >
           <div className="container px-6 mx-auto grid">
@@ -34,7 +72,7 @@ export default function FoodElement({ pizza }) {
               >
                 Image
               </label>
-              {selectedImage && (
+              {selectedImage && typeof selectedImage === "string" && (
                 <div>
                   <img
                     className="w-full"
@@ -45,12 +83,24 @@ export default function FoodElement({ pizza }) {
                   <br />
                 </div>
               )}
+              {selectedImage && typeof selectedImage !== "string" && (
+                <div>
+                  <img
+                    className="w-full"
+                    alt="not fount"
+                    width={"250px"}
+                    src={URL.createObjectURL(selectedImage)}
+                  />
+                  <br />
+                </div>
+              )}
+
               <input
                 className=" shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="name"
                 type="file"
                 onChange={(event) => {
-                  setSelectedImage(URL.createObjectURL(event.target.files[0]));
+                  setSelectedImage(event.target.files[0]);
                 }}
               />
             </div>
@@ -102,9 +152,8 @@ export default function FoodElement({ pizza }) {
                 onChange={(e) => {
                   useDescription(e.target.value);
                 }}
-              >
-                {description}
-              </textarea>
+                defaultValue={description}
+              ></textarea>
             </div>
 
             <div className="flex items-center justify-between">

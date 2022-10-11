@@ -18,6 +18,7 @@ use App\Http\Controllers\UserController;
 
 Route::group(['prefix'=>'foods'],function(){
     Route ::get('',[FoodController::class,'index']);
+    Route ::get('pagination',[FoodController::class,'paginate']);
     Route ::post('create',[FoodController::class,'store']);
     Route ::get('{id}',[FoodController::class,'show']);
     Route ::post('update/{id}',[FoodController::class,'update']);

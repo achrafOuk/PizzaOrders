@@ -8,8 +8,16 @@ class FoodController extends Controller
 {
     //show all the Food
     
-    public function index(){
+    /*public function index(){
         return Food::all();
+    }*/
+    public function index()
+    {
+        $pagination = Food::query()->paginate(2);
+        return response()->json([
+            'response'=>$pagination
+        ]);
+
     }
     //store new element
     public function store(Request $request){
@@ -65,7 +73,7 @@ class FoodController extends Controller
             'food_name'=>'required',
             'food_price'=>'required',
             'food_description'=>'required',
-            'food_image'=>'required'
+            //'food_image'=>'required'
          ]);
         $id = intval($id);
         $food = Food::where('id',$id);
@@ -80,12 +88,23 @@ class FoodController extends Controller
             ]);
         }
         //store images
-        $filenameWithExt = $request->file('food_image')->getClientOriginalName();
+        echo $request->file('food_image');
+        if ($request->file('food_image'))
+        {
+        $filenamewithext = $request->file('food_image')->getClientOriginalName();
+        echo ($filenamewithext );
         $fileNameToStore = 'food_'.$id.'.png';
         $food_image = $request->file("food_image")->storeAs("public/image", $fileNameToStore);
         $food->update([
                 'food_name'=> $food_name,
                 'food_image'=>$fileNameToStore,
+                'food_price' => $request->input('food_price'),
+                'food_description' => $request->input('food_description'),
+            ]);
+            return response()->json([ 'response'=>'pizza was updated with image' ]);
+        }
+        $food->update([
+                'food_name'=> $food_name,
                 'food_price' => $request->input('food_price'),
                 'food_description' => $request->input('food_description'),
             ]);

@@ -34,7 +34,6 @@ export default function pizza({ pizza }) {
 
 export async function getServerSideProps(context) {
   // Fetch data from external API
-  console.log(context.params.id);
   const res = await fetch(
     `http://localhost:8000/api/foods/${context.params.id}`
   );
