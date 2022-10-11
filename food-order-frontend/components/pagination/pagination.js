@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useState } from "react";
+import Item from "./item";
 
 export default function Pagination({
   PageNumbers,
@@ -9,47 +10,36 @@ export default function Pagination({
 }) {
   let pagination = Array.from(Array(PageNumbers).keys());
   console.log(`url:${url}`);
+  //className="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
   return (
     <nav aria-label="Page navigation example" className="flex justify-center">
       <ul className="bg-white inline-flex -space-x-px">
-        <li>
-          <Link href={`${url}`}>
-            <a
-              className="py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 :bg-gray-800 "
-              onClick={() => {
-                setCurrentPage(currentPage - 1);
-              }}
-            >
-              Previous
-            </a>
-          </Link>
-        </li>
+        <Item
+          page={"preview"}
+          url={`${url}`}
+          setPage={() => {
+            setCurrentPage(currentPage - 1);
+          }}
+          currentPage={currentPage}
+        ></Item>
         {pagination.map((number) => (
-          <li key={number}>
-            <Link href={`${url}`}>
-              <a
-                className="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-                onClick={() => {
-                  setCurrentPage(number + 1);
-                }}
-              >
-                {number + 1}
-              </a>
-            </Link>
-          </li>
+          <Item
+            url={`${url}`}
+            setPage={() => {
+              setCurrentPage(number + 1);
+            }}
+            page={number + 1}
+            key={number}
+          ></Item>
         ))}
-        <li>
-          <Link href={`${url}`}>
-            <a
-              className="py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 :bg-gray-800 "
-              onClick={() => {
-                setCurrentPage(currentPage - 1);
-              }}
-            >
-              Previous
-            </a>
-          </Link>
-        </li>
+        <Item
+          page={"next"}
+          url={`${url}`}
+          setPage={() => {
+            setCurrentPage(currentPage + 1);
+          }}
+          lastPage={PageNumbers}
+        ></Item>
       </ul>
     </nav>
   );

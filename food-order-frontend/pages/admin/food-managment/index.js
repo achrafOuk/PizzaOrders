@@ -4,13 +4,6 @@ import AdminTable from "../../../components/dashboard/table";
 import { useState, useEffect, useRef } from "react";
 import Pagination from "../../../components/pagination/pagination";
 export default function food_mangment({ pizzaList, pages_counter }) {
-  useEffect(() => {
-    async () => {
-      const res = await fetch("http://localhost:8000/api/foods/");
-      pizzaList = await res.json();
-    };
-  }, []);
-
   let [currentPage, setCurrentPage] = useState(1);
   return (
     <div className="flex h-screen bg-gray-50 ">
