@@ -32,7 +32,7 @@ export default function cart() {
                 <FoodItems products={order}></FoodItems>
               ) : (
                 <tr className="text-sm sm:text-base text-gray-600 text-center">
-                  <td colspan="5" className="p-[5%]">
+                  <td colSpan="5" className="p-[5%]">
                     The cart is empty
                   </td>
                 </tr>

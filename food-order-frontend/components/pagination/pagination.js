@@ -1,5 +1,3 @@
-import Link from "next/link";
-import { useState } from "react";
 import Item from "./item";
 
 export default function Pagination({
@@ -9,35 +7,36 @@ export default function Pagination({
   url,
 }) {
   let pagination = Array.from(Array(PageNumbers).keys());
-  console.log(`url:${url}`);
-  //className="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+  // ${currentPage}
   return (
     <nav aria-label="Page navigation example" className="flex justify-center">
       <ul className="bg-white inline-flex -space-x-px">
         <Item
           page={"preview"}
-          url={`${url}`}
+          url={`${url}${currentPage - 1}`}
           setPage={() => {
-            setCurrentPage(currentPage - 1);
+            setCurrentPage((current) => current - 1);
           }}
           currentPage={currentPage}
         ></Item>
         {pagination.map((number) => (
           <Item
-            url={`${url}`}
+            url={`${url}${number + 1}`}
             setPage={() => {
               setCurrentPage(number + 1);
             }}
             page={number + 1}
+            currentPage={currentPage}
             key={number}
           ></Item>
         ))}
         <Item
           page={"next"}
-          url={`${url}`}
+          url={`${url}${currentPage + 1}`}
           setPage={() => {
-            setCurrentPage(currentPage + 1);
+            setCurrentPage((current) => current + 1);
           }}
+          currentPage={currentPage}
           lastPage={PageNumbers}
         ></Item>
       </ul>

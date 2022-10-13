@@ -1,7 +1,6 @@
 import FoodCart from "./FoodCart";
 
 export default function FoodList({ FoodList }) {
-  console.log("pizza lists from component:", FoodList);
   return (
     <>
       {FoodList.map((food) => (

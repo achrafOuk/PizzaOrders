@@ -6,7 +6,6 @@ function update_item_in_cart(dispatch, product, new_value) {
     order: product,
     quantity: new_value,
   };
-  console.log("data:", data);
   dispatch(update(data));
 }
 
@@ -14,7 +13,6 @@ export default function FoodItem({ product }) {
   console.log("product:", product);
   const dispatch = useDispatch();
   let [quantity, setQuantity] = useState(product.quantity);
-  console.log("quantity order:", quantity);
   return (
     <tr className="text-sm sm:text-base text-gray-600 text-center">
       <td className="font-primary font-medium px-4 sm:px-6 py-4 flex items-center">

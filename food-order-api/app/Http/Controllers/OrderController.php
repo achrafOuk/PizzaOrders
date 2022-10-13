@@ -8,7 +8,14 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-
+    public function index()
+    {
+        // $order = Order::get();
+        $order = Order::select('_id','customer','total','address','status')
+        ->orderBy('id', 'desc')
+        ->get();
+        return response()->json($oder);
+    }
     public function show($id)
     {
         $id = intval($id);
@@ -18,7 +25,7 @@ class OrderController extends Controller
             return response()->json([ 'response'=>'order does not exists' ]);
         }
         $order = $order->select('_id','customer','total','address','status')->first();
-        return response()->json([ 'data'=> $order ]);
+        return response()->json($oder);
     }
     public function store(Request $request){
          $this->validate($request,[

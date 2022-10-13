@@ -27,6 +27,7 @@ Route::group(['prefix'=>'foods'],function(){
 });
 
 Route::group(['prefix'=>'order'],function(){
+    Route ::get('',[OrderController::class,'index']);
     Route ::post('checkout',[OrderController::class,'store']);
     Route ::post('update-status/{id}',[OrderController::class,'update_order_status']);
     Route ::get('show-order/{id}',[OrderController::class,'show']);

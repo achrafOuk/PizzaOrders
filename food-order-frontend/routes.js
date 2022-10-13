@@ -7,4 +7,5 @@ export const routes = {
   LOGIN: `${process.env.NEXT_PUBLIC_API_ENVPOINT}/login`,
   CHECKOUT: `${process.env.NEXT_PUBLIC_API_ENVPOINT}/register`,
   IMAGE: `${process.env.NEXT_PUBLIC_API_ENVPOINT}/foods/image`,
+  ORDER: `${process.env.NEXT_PUBLIC_API_ENVPOINT}/order`,
 };
