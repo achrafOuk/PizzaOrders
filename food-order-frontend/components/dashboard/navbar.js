@@ -14,7 +14,10 @@ export default function AdminNavbar() {
             text="Food managment"
             link="/admin/food-managment"
           ></AdminLink>
-          <AdminLink text="Order managment" link="/"></AdminLink>
+          <AdminLink
+            text="Order managment"
+            link="/admin/order-managment"
+          ></AdminLink>
         </ul>
         <ul></ul>
       </div>

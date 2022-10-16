@@ -10,11 +10,10 @@ class OrderController extends Controller
 {
     public function index()
     {
-        // $order = Order::get();
-        $order = Order::select('_id','customer','total','address','status')
+        $order = Order::select('_id','id','customer','total','address','status')
         ->orderBy('id', 'desc')
-        ->get();
-        return response()->json($oder);
+        ->paginate(5);
+        return response()->json($order);
     }
     public function show($id)
     {

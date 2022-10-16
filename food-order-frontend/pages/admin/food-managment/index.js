@@ -1,11 +1,15 @@
 import AdminNavbar from "../../../components/dashboard/navbar";
 import AdminSidebar from "../../../components/dashboard/sidebar";
 import AdminTable from "../../../components/dashboard/table";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import Pagination from "../../../components/pagination/pagination";
 import { routes } from "../../../routes";
+import { useRouter } from "next/router";
 export default function food_mangment({ pizzaList, pages_counter }) {
-  let [currentPage, setCurrentPage] = useState(1);
+  let router = useRouter();
+  let page = router.query["page"] ?? 1;
+  let [currentPage, setCurrentPage] = useState(parseInt(page));
+
   console.log(`current page:${currentPage}`);
   console.log("--------------------------");
   return (
@@ -19,7 +23,7 @@ export default function food_mangment({ pizzaList, pages_counter }) {
             PageNumbers={pages_counter}
             setCurrentPage={setCurrentPage}
             currentPage={currentPage}
-            url={`/admin/food-managment?page=${currentPage}`}
+            url={`/admin/food-managment?page=`}
           ></Pagination>
         </main>
       </div>
@@ -33,13 +37,10 @@ export async function getServerSideProps(context) {
   let requestOptions = {
     method: "GET",
   };
-
   let res = await fetch(`${routes.FOODS}?page=${current_page}`, requestOptions);
   let response = await res.json();
   let pizzaList = response.response.data;
   let pages_counter = response.response.last_page;
-  // Pass data to the page via props
-  //pizzaList = `http://localhost:8000/api/foods?page=${current_page}`;
   return {
     props: {
       pizzaList,

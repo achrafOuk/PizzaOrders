@@ -10,13 +10,7 @@ export default function Home({ pizzaList, pages_counter }) {
   let router = useRouter();
   let page = router.query["page"] ?? 1;
   let [currentPage, setCurrentPage] = useState(parseInt(page));
-  useEffect(() => {
-    setCurrentPage(parseInt(page));
-  }, []);
-  console.log("******************");
-  console.log("current page from url:", router.query["page"]);
-  console.log("current page from state:", currentPage);
-  console.log("******************");
+
   return (
     <>
       <Seo title="FoodOrderAPP"></Seo>

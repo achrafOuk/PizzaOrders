@@ -8,4 +8,5 @@ export const routes = {
   CHECKOUT: `${process.env.NEXT_PUBLIC_API_ENVPOINT}/register`,
   IMAGE: `${process.env.NEXT_PUBLIC_API_ENVPOINT}/foods/image`,
   ORDER: `${process.env.NEXT_PUBLIC_API_ENVPOINT}/order`,
+  NEXT_ORDER_STATUS: `${process.env.NEXT_PUBLIC_API_ENVPOINT}/order/update-status`,
 };

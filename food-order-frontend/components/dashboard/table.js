@@ -4,7 +4,7 @@ import FoodList from "../food/FoodList";
 import Image from "next/image";
 // loading="lazy"
 export default function AdminTable({ pizzaList }) {
-  let columns = ["item", "name", "price", "description"];
+  let columns = ["id", "name", "price", "description"];
   console.log(pizzaList);
   let route = useRouter();
   return (
@@ -19,7 +19,7 @@ export default function AdminTable({ pizzaList }) {
         <div className="w-full overflow-x-auto">
           <table className="w-full whitespace-no-wrap">
             <thead>
-              <tr className="text-xs font-semibold tracking-wide text-left text-white uppercase border-b ">
+              <tr className="bg-purple-600 text-xs font-semibold tracking-wide text-left text-white uppercase border-b ">
                 {columns.map((col, id) => (
                   <th key={id} className="px-4 py-3">
                     {col}
