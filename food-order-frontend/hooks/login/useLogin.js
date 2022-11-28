@@ -1,4 +1,3 @@
-import { setLogin } from "../../redux/slices/loginSlice";
 import { routes } from "../../routes";
 
 export default async function useLogin(event, username, password, setMessage) {
@@ -19,8 +18,8 @@ export default async function useLogin(event, username, password, setMessage) {
   myHeaders.append("Content-Type", "application/json");
 
   let raw = JSON.stringify({
-    name: "achraf",
-    password: "123",
+    name: username,
+    password: password,
   });
 
   let requestOptions = {

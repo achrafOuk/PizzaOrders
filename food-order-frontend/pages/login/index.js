@@ -30,13 +30,9 @@ export default function login() {
                 className="space-y-4 md:space-y-6"
                 onSubmit={async (event) => {
                   setLoading(true);
-                  let user = await useLogin(
-                    event,
-                    username,
-                    password,
-                    setMessage
-                  );
-                  if (user !== undefined) {
+                  let user = await useLogin( event, username, password, setMessage);
+                  console.log('user name:',user);
+                  if (user?.username !== undefined) {
                     route.push("/admin");
                     dispatch(setLogin(user));
                     return;

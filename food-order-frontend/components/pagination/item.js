@@ -1,5 +1,8 @@
 import Link from "next/link";
 export default function Item({ page, currentPage, url, setPage, lastPage }) {
+  //page = parseInt(page);
+   page = ( page !== 'next' && page !== 'preview') ? parseInt(page): page;
+   currentPage = parseInt(currentPage);
   if (page === currentPage) {
     return (
       <li>

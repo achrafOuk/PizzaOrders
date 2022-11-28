@@ -2,16 +2,40 @@ import { useRouter } from "next/router";
 import { routes } from "../../routes";
 import FoodList from "../food/FoodList";
 import Image from "next/image";
+import Link from "next/link";
+import { useSelector } from "react-redux";
 // loading="lazy"
-export default function AdminTable({ pizzaList }) {
+
+export default function AdminTable({ pizzaList,setPizzaList}) {
+  async function delete_food(token,id)
+  {
+    try{
+      let myHeaders = new Headers();
+      myHeaders.append("Authorization", `Bearer ${token}`);
+      let requestOptions = {
+        method: "POST",
+        redirect: "follow",
+        headers: myHeaders,
+      };
+      setPizzaList( pizzaList.filter((pizza)=>pizza.id!==id) );
+      await fetch(`${routes.DELETE_FOOD}/${id}`,requestOptions)
+      .then(e=>console.log('delete pizza',id))
+      .catch(err=>console.log('error:',err));
+      //router.push('/admin/food-managment?page=1');
+    }
+    catch(err) {
+      console.log('err:',err)
+    }
+  }
+  const user_token = useSelector( (state) => state?.reducers.order?.login.token);
   let columns = ["id", "name", "price", "description"];
-  console.log(pizzaList);
   let route = useRouter();
+  
   return (
     <div className="mt-[5%] container grid px-6 mx-auto">
       <div className="w-full overflow-hidden rounded-lg shadow-xs">
         <button className="flex items-center justify-between w-40 px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple mb-[5%]">
-          Create new food
+          <Link href="/admin/food-managment/add">Create new food</Link>
           <span className="ml-2" aria-hidden="true">
             +
           </span>
@@ -76,6 +100,9 @@ export default function AdminTable({ pizzaList }) {
                       <button
                         className="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg  focus:outline-none focus:shadow-outline-gray"
                         aria-label="Delete"
+                        onClick={async ()=>{
+                          delete_food(user_token,pizza.id)
+                        }}
                       >
                         <svg
                           className="w-5 h-5"
@@ -101,7 +128,6 @@ export default function AdminTable({ pizzaList }) {
           <span className="flex items-center col-span-3"></span>
           <span className="col-span-2"></span>
           <span className="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
-            {/* <Pagination></Pagination> */}
           </span>
         </div>
       </div>

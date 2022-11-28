@@ -11,9 +11,22 @@ export default function food_mangment({ orders, pages_counter }) {
   let page = router.query["page"] ?? 1;
   let [currentPage, setCurrentPage] = useState(parseInt(page));
   let [Orders, setOrders] = useState(orders);
+  async function fetch_orders() {
+    let res = await fetch(`${routes.ORDER}?page=${currentPage}`);
+    res = await res.json();
+    let orders = res?.data;
+    setOrders(orders);
+  }
   useEffect(() => {
-    console.log("current page:");
-  }, [orders]);
+    async () => {
+      fetch_orders();
+    };
+  }, [Orders]);
+
+  useEffect(() => {
+    fetch_orders();
+  }, [currentPage]);
+
   return (
     <div className="flex h-screen bg-gray-50 ">
       <AdminNavbar></AdminNavbar>

@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import AdminNavbar from "../../../../components/dashboard/navbar";
 import AdminSidebar from "../../../../components/dashboard/sidebar";
+import getToken from "../../../../hooks/login/getToken";
 import { routes } from "../../../../routes";
 
 export default function FoodElement() {
@@ -9,6 +10,8 @@ export default function FoodElement() {
   let [price, usePrie] = useState();
   let [description, useDescription] = useState();
   const [selectedImage, setSelectedImage] = useState(null);
+  let user_token = getToken();
+  console.log("user token:", user_token);
   let route = useRouter();
   function setPrice(price) {
     return parseFloat(price) !== NaN ? price : parseFloat(1);
@@ -19,6 +22,9 @@ export default function FoodElement() {
     formdata.append("food_name", name);
     formdata.append("food_price", price);
     formdata.append("food_description", description);
+    if (user_token !== null) {
+      formdata.append("Authorization", `Bearer ${user_token}`);
+    }
     formdata.append(
       "food_image",
       selectedImage,

@@ -4,9 +4,9 @@ function Footer() {
   const username = useSelector(
     (state) => state?.reducers.order?.login.username
   );
-  if (username !== "") {
+  /*if (username !== "") {
     return <></>;
-  }
+  }*/
   return (
     <footer className="mt-[5%] text-white bg-purple-600 py-4 flex justify-center font-primary items-center">
       Created by

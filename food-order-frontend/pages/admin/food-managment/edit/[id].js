@@ -3,7 +3,6 @@ import { useState } from "react";
 import AdminNavbar from "../../../../components/dashboard/navbar";
 import AdminSidebar from "../../../../components/dashboard/sidebar";
 import { routes } from "../../../../routes";
-
 export default function FoodElement({ pizza }) {
   console.log("price:", pizza.food_price);
   let [price, usePrie] = useState(pizza.food_price);
