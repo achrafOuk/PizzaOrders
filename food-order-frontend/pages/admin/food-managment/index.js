@@ -22,11 +22,6 @@ export default function food_mangment({ pizzaList, pages_counter }) {
 
   useEffect(() => {
     let fetch_counter = async () => {
-      /*console.log('------------------------------');
-      console.log('pages counter list:',pages_counter);
-      console.log('pizza list length:',PizzaList.length);
-      console.log('pizza list:',PizzaList);
-      console.log('------------------------------');*/
       if( PizzaList.length === 0 )
       {
         if ( pages_counter !==1 )
@@ -75,7 +70,6 @@ export default function food_mangment({ pizzaList, pages_counter }) {
 export async function getServerSideProps(context) {
   // Fetch data from external API
   let current_page = context.query?.page ?? 1;
-  //console.log("current_page", context.query?.page);
   let requestOptions = {
     method: "GET",
   };

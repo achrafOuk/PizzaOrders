@@ -2,15 +2,18 @@ import "../styles/globals.css";
 import "tailwindcss/tailwind.css";
 import Navbar from "../components/navbar/Navbar";
 import store from "../redux/store";
+import {wrapper} from "../redux/store";
 import { persistor } from "../redux/store";
-import { Provider } from "react-redux";
+import { Provider, useSelector, useStore } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import Footer from "../components/shared/footer";
 function MyApp({ Component, pageProps }) {
+  //let {new_store,props} = wrapper.useWrappedStore(pageProps);
+  let store = useStore((state)=>state);
   return (
     <>
       <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
+        <PersistGate loading={null} persistor={store._persistor}>
           <div className="flex flex-col justify-between min-h-screen">
             <Navbar></Navbar>
             <Component {...pageProps} />
@@ -22,4 +25,5 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export default MyApp;
+//export default MyApp;
+export default wrapper.withRedux(MyApp);
