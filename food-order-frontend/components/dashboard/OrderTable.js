@@ -1,12 +1,15 @@
 import { routes } from "../../routes";
 import Button from "../shared/button";
-import { useSelector} from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { setLogout } from "../../redux/slices/loginSlice";
 
 export default function OrderTable({ orders, currentPage }) {
   const user_token = useSelector( (state) => state?.reducers.order?.login.token);
+  console.log(`Bearer ${user_token}`)
+  const dispatch = useDispatch()
   let router = useRouter();
   async function next_stage( id, currentPage ) {
     let status = ['payment','prepayring','on the way','delivered'];
@@ -27,22 +30,17 @@ export default function OrderTable({ orders, currentPage }) {
       headers: myHeaders,
       redirect: "follow",
     };
-    try{
-
     await fetch(`${routes.NEXT_ORDER_STATUS}/${id}`, requestOptions);
-    let orders = await fetch(`${routes.ORDER}?page=${currentPage}`);
-    let res = await orders?.json();
-    setOrders(res.data);
-    }
-    catch(err)
-    {
-      router.push('/login');
-    }
+    
   } 
   let columns = ["id", "customer name", "status", "price", "address"];
   console.log('***************************');
-  console.log('Orders:',orders);
+  console.log('orders:',orders);
   let [ Orders, setOrders ] = useState(orders);
+  console.log('Orders:',Orders);
+  useEffect(()=>{
+    setOrders(orders)
+  },[orders])
   return (
     <div className="mt-[5%] container grid px-6 mx-auto">
       <div className="w-full overflow-hidden rounded-lg shadow-xs">

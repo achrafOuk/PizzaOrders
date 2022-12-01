@@ -67,7 +67,7 @@ class OrderController extends Controller
         $order = $order->first();
         $order_status = $order->status;
         $current_status_id = array_search($order_status,$status);
-        if ($current_status_id+1==count($status)-1)
+        if ($current_status_id+1==count($status))
         {
             return response()->json([ 'response'=>'cannot update the status of the order' ]);
         }
