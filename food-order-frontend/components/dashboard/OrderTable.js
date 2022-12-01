@@ -1,10 +1,27 @@
 import { routes } from "../../routes";
 import Button from "../shared/button";
+import { useSelector} from "react-redux";
+import { useState } from "react";
 
-export default function OrderTable({ orders, setOrders, currentPage }) {
-  async function next_stage(id, setOrders, currentPage) {
+export default function OrderTable({ orders, currentPage }) {
+  const user_token = useSelector( (state) => state?.reducers.order?.login.token);
+ async function next_stage( id, currentPage ) {
+    let status = ['payment','prepayring','on the way','delivered'];
+    if ( Orders === undefined ) { return;}
+    let orders_clones = [...Orders];
+    let order = orders_clones.filter(order=>order.id===id)[0]
+    let order_id = orders_clones.indexOf( order );
+    let order_status = status.indexOf( order.status );
+    if ( order_id!==-1 && order_status !== status.length-1)
+    {
+      orders_clones[order_id].status = status[order_status+1];
+    }
+    setOrders(orders_clones);
+    let myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${user_token}`);
     let requestOptions = {
       method: "POST",
+      headers: myHeaders,
       redirect: "follow",
     };
     await fetch(`${routes.NEXT_ORDER_STATUS}/${id}`, requestOptions);
@@ -13,9 +30,11 @@ export default function OrderTable({ orders, setOrders, currentPage }) {
     let res = await orders?.json();
     console.log(`new orders data:${res}`);
     setOrders(res.data);
-  }
+  } 
   let columns = ["id", "customer name", "status", "price", "address"];
-  console.log("orders types:", typeof setOrders);
+  console.log('***************************');
+  let [ Orders, setOrders ] = useState(orders);
+  console.log('Orders:',orders,Orders);
   return (
     <div className="mt-[5%] container grid px-6 mx-auto">
       <div className="w-full overflow-hidden rounded-lg shadow-xs">
@@ -32,7 +51,7 @@ export default function OrderTable({ orders, setOrders, currentPage }) {
               </tr>
             </thead>
             <tbody className="bg-white divide-y ">
-              {orders?.map((order) => (
+              {Orders?.map((order) => (
                 <tr key={order.id} className="text-gray-700 ">
                   <td className="px-4 py-3">
                     <p className="font-semibold">{order._id}</p>
@@ -41,7 +60,7 @@ export default function OrderTable({ orders, setOrders, currentPage }) {
                     <p className="font-semibold">{order.customer}</p>
                   </td>
                   <td className="px-4 py-3 text-sm">{order.status}</td>
-                  <td className="px-4 py-3 text-sm">{order.total}</td>
+                  <td className="px-4 py-3 text-sm">{order.total}$</td>
                   <td className="px-4 py-3 text-sm">{order.address}</td>
                   <td className="px-4 py-3">
                     <div className="flex items-center space-x-4 text-sm">
@@ -55,7 +74,7 @@ export default function OrderTable({ orders, setOrders, currentPage }) {
                           buttonText="Next stage"
                           onClick={() => {
                             console.log(order?.id);
-                            next_stage(order.id, setOrders, currentPage);
+                            next_stage(order.id, currentPage);
                           }}
                         ></Button>
                       ) : (

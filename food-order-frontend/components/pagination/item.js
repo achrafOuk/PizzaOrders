@@ -1,6 +1,8 @@
 import Link from "next/link";
 export default function Item({ page, currentPage, url, setPage, lastPage }) {
   //page = parseInt(page);
+  console.log(page,currentPage,lastPage)
+  console.log('--------------------------')
    page = ( page !== 'next' && page !== 'preview') ? parseInt(page): page;
    currentPage = parseInt(currentPage);
   if (page === currentPage) {
@@ -15,7 +17,7 @@ export default function Item({ page, currentPage, url, setPage, lastPage }) {
       </li>
     );
   }
-  if (page === "preview" && currentPage == 1) {
+  if (page === "preview" && currentPage === 1) {
     return (
       <li>
         <a
@@ -27,7 +29,7 @@ export default function Item({ page, currentPage, url, setPage, lastPage }) {
       </li>
     );
   }
-  if (page === "next" && lastPage == currentPage) {
+  if (page === "next" && lastPage === currentPage) {
     return (
       <li>
         <a

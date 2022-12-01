@@ -2,6 +2,8 @@ import Item from "./item";
 
 export default function Pagination({ PageNumbers, currentPage, setCurrentPage, url }) {
   let pagination = Array.from(Array(PageNumbers).keys());
+  console.log('page numbers::',PageNumbers)
+  console.log('///////////////////////////')
   return (
     <nav aria-label="Page navigation example" className="flex justify-center">
       <ul className="bg-white inline-flex -space-x-px">
