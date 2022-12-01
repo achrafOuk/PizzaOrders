@@ -24,7 +24,7 @@ class OrderController extends Controller
             return response()->json([ 'response'=>'order does not exists' ]);
         }
         $order = $order->select('_id','customer','total','address','status')->first();
-        return response()->json($oder);
+        return response()->json($order);
     }
     public function store(Request $request){
          $this->validate($request,[
@@ -78,3 +78,5 @@ class OrderController extends Controller
         return response()->json([ 'response'=>'order status was updated' ]);
     }
 }
+
+

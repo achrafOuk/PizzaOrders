@@ -2,10 +2,13 @@ import { routes } from "../../routes";
 import Button from "../shared/button";
 import { useSelector} from "react-redux";
 import { useState } from "react";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function OrderTable({ orders, currentPage }) {
   const user_token = useSelector( (state) => state?.reducers.order?.login.token);
- async function next_stage( id, currentPage ) {
+  let router = useRouter();
+  async function next_stage( id, currentPage ) {
     let status = ['payment','prepayring','on the way','delivered'];
     if ( Orders === undefined ) { return;}
     let orders_clones = [...Orders];
@@ -24,17 +27,22 @@ export default function OrderTable({ orders, currentPage }) {
       headers: myHeaders,
       redirect: "follow",
     };
+    try{
+
     await fetch(`${routes.NEXT_ORDER_STATUS}/${id}`, requestOptions);
-    console.log("order status was changed");
     let orders = await fetch(`${routes.ORDER}?page=${currentPage}`);
     let res = await orders?.json();
-    console.log(`new orders data:${res}`);
     setOrders(res.data);
+    }
+    catch(err)
+    {
+      router.push('/login');
+    }
   } 
   let columns = ["id", "customer name", "status", "price", "address"];
   console.log('***************************');
+  console.log('Orders:',orders);
   let [ Orders, setOrders ] = useState(orders);
-  console.log('Orders:',orders,Orders);
   return (
     <div className="mt-[5%] container grid px-6 mx-auto">
       <div className="w-full overflow-hidden rounded-lg shadow-xs">

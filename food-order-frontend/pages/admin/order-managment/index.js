@@ -37,7 +37,9 @@ export default function food_mangment({ orders, pages_counter }) {
       fetch_orders();
     };
   }, []);
-
+  useEffect(()=>{
+    setOrders(orders);
+  },[orders])
   useEffect(() => {
     fetch_orders();
   }, [currentPage]);
