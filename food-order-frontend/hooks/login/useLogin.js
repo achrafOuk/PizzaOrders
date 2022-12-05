@@ -8,11 +8,7 @@ export default async function useLogin(event, username, password, setMessage) {
     );
     return;
   }
-  console.log("login endpoint:", routes.LOGIN);
-  let user_data = JSON.stringify({
-    user: username,
-    password: password,
-  });
+
   let myHeaders = new Headers();
   myHeaders.append("Accept", "application/json");
   myHeaders.append("Content-Type", "application/json");
@@ -29,7 +25,7 @@ export default async function useLogin(event, username, password, setMessage) {
     redirect: "follow",
   };
 
-  let user = await fetch("http://localhost:8000/api/login", requestOptions)
+  let user = await fetch("/api/login", requestOptions)
     .then((response) => {
       return response.json();
     })

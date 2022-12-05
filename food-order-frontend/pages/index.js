@@ -7,6 +7,7 @@ import styles from "../styles/Home.module.css";
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 export default function Home({ pizzaList, pages_counter }) {
+  console.log('home')
   let router = useRouter();
   let page = router.query["page"] ?? 1;
   let [currentPage, setCurrentPage] = useState(parseInt(page));
