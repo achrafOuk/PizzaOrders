@@ -32,7 +32,10 @@ class UserController extends Controller
         $username =$request->name; 
         //$user = User::where('name',$username)->get()->first();
         $access_token = auth()->user()->createToken('auth token')->accessToken;
-        return response()->json([ 'response'=>'User is authenticated','access_token'=>$access_token,"username"=>$username],200);
+        return response()->json([
+        'response'=>'User is authenticated',
+        'access_token'=>$access_token,
+        "username"=>$username],200);
     }
     public function logout(Request $request)
     {

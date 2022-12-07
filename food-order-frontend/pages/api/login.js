@@ -7,7 +7,7 @@ export default async (req,res)=>{
         const {name,password } = req.body;
         if( name ==='' || password ==='')
         {
-            return res.status(500).json({ success: `you cannot leave any field empty` });
+            return res.status(500).json({ success: `you cannot leave any field empty` ,status:500});
         }
         const body = req.body;
         let myHeaders = new Headers();
@@ -30,7 +30,8 @@ export default async (req,res)=>{
         if( login_fetcher?.response === undefined )
         {
             return res.status(500).json({
-                success: 'credentials are wrong'
+                success: 'credentials are wrong',
+                status:500
             });
         }
         let httpOnlyCookie = serialize(
@@ -44,12 +45,15 @@ export default async (req,res)=>{
         )
         res.setHeader('set-Cookie', httpOnlyCookie);
         return res.status(200).json({
-            success: 'logged in successfully'
+            username:login_fetcher?.username,
+            success: 'logged in successfully',
+            status:200
         });
     }
     else{
         return res.status(500).json({
-            success: `method ${req.method} is not supported`
+            success: `method ${req.method} is not supported`,
+            status:500
         });
     }
 }

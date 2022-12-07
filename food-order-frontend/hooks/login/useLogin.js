@@ -32,12 +32,6 @@ export default async function useLogin(event, username, password, setMessage) {
     .catch(() => {
       setMessage("Error occured! try again");
     });
-  if (user === undefined) {
-    return;
-  }
-  let data = {
-    username: user.username,
-    token: user.access_token,
-  };
-  return data;
+  console.log('status',user)
+  return user;
 }
