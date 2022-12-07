@@ -38,7 +38,7 @@ export default async (req,res)=>{
             'access_token', login_fetcher?.access_token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV !== 'development',
-                maxAge: 60 * 30,
+                maxAge: 60 * 60 * 3,
                 sameSite: 'strict',
                 path: '/'
             }

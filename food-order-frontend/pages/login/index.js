@@ -30,8 +30,6 @@ export default function login() {
               onSubmit={async (event) => {
                 setLoading(true);
                 let user = await useLogin( event, username, password, setMessage);
-                console.log('user name:',user);
-                console.log('status',user?.status);
                 if (user?.status === 200) {
                   route.push("/admin");
                   dispatch(setLogin(user));

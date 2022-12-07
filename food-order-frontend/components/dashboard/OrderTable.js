@@ -4,10 +4,8 @@ import { useDispatch, useSelector} from "react-redux";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import { setLogout } from "../../redux/slices/loginSlice";
 
-export default function OrderTable({ orders, currentPage }) {
-  const user_token = useSelector( (state) => state?.reducers.order?.login.token);
+export default function OrderTable({ orders, currentPage ,user_token, isUserAuth}) {
   console.log(`Bearer ${user_token}`)
   const dispatch = useDispatch()
   let router = useRouter();
