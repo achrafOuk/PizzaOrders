@@ -1,16 +1,19 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import Alert from "../../components/shared/alert";
 import Button from "../../components/shared/button";
 import useLogin from "../../hooks/login/useLogin";
-import { setLogin } from "../../redux/slices/loginSlice";
+import { setLogin, setLogout } from "../../redux/slices/loginSlice";
 export default function login() {
   let [msg, setMessage] = useState("");
   let [username, setUsername] = useState("");
   let [password, setPassword] = useState("");
   let [isLoading, setLoading] = useState(false);
   let dispatch = useDispatch();
+  useEffect(()=>{
+    dispatch(setLogout());
+  },[])
   let route = useRouter();
   return (
     <section className="bg-gray-50 ">
@@ -28,12 +31,15 @@ export default function login() {
             <form
               className="space-y-4 md:space-y-6"
               onSubmit={async (event) => {
+                event.preventDefault();
                 setLoading(true);
                 let user = await useLogin( event, username, password, setMessage);
+                console.log('user from login page:',user);
+                console.log('user from login page:',user?.status);
                 if (user?.status === 200) {
                   route.push("/admin");
                   dispatch(setLogin(user));
-                  return;
+                  //return;
                 }
                 setLoading(false);
               }}

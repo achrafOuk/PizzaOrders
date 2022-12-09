@@ -3,8 +3,12 @@ import { routes } from "../../routes";
 export default async (req,res)=>{
     let {cookies} = req;
     console.log('cookies:',cookies)
-    if (req.method === 'POST' && cookie!==undefined)
+    if (req.method === 'POST' )
     {
+        if( cookie!==undefined)
+        {
+          return res.status(500).json({ error: 'you cannot logout' });
+        }
         let myHeaders = new Headers();
         myHeaders.append("Authorization", `Bearer ${cookies?.access_token}`);
         myHeaders.append("Content-Type", "application/json");

@@ -42,17 +42,27 @@ export default function food_mangment({ orders, pages_counter,user_token, isUser
 export async function getServerSideProps(context) {
   // check is user is authentificated
   const cookies = context.req.headers.cookie;
+  let headers = {  'access_token':cookies  };
+  let request = {
+    method: 'GET',
+    redirect: 'follow',
+    headers: headers,
+  };
+  let host = context.req.headers.host
+  let currentPage = context.query.page;
+  let orders_api = await fetch(`http://${host}/api/orders/`,request);
+  orders_api = await orders_api.json();
   let user_token =cookies?.split('=')[1];
   let isUserAuth =  user_token !== undefined ? true: false;
   const req = context.req;
   let myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${user_token}`);
+  
   let requestOptions = {
     method: 'GET',
     headers: myHeaders,
-    redirect: 'follow'
+    credentials: "same-origin",
   };
-  let currentPage = context.query.page;
   let res = await fetch(`${routes.ORDER}?page=${currentPage}`,requestOptions);
   res = await res.json();
   let orders = res?.data;

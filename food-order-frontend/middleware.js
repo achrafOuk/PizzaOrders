@@ -5,6 +5,9 @@ export function middleware(request,response)
   let isDashboardRoute =  request.nextUrl.pathname.startsWith('/admin');
   // check is user is authentificated
   let {cookies}= request;
+  console.log('////////////////////')
+  console.log('middleware :',cookies)
+  console.log('////////////////////')
   let isUserAuth = cookies.get('access_token') !== undefined ? true: false;
   if( isDashboardRoute && isUserAuth ) 
   { 

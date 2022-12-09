@@ -1,6 +1,5 @@
 import AdminNavbar from "../../components/dashboard/navbar";
 import AdminSidebar from "../../components/dashboard/sidebar";
-import Link from "next/link";
 export default function Admin() {
   return (
     <div className="flex h-screen bg-gray-50 ">

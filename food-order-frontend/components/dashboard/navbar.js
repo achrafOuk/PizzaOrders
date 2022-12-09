@@ -19,7 +19,6 @@ export default function AdminNavbar() {
             link="/admin/order-managment"
           ></AdminLink>
         </ul>
-        <ul></ul>
       </div>
     </aside>
   );

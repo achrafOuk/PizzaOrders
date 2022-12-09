@@ -5,23 +5,24 @@ export default async (req,res)=>{
     if (req.method === 'POST')
     {
         const {name,password } = req.body;
-        if( name ==='' || password ==='')
+        console.log(name,password )
+        if( (name ==='' || password ==='') || (name ===undefined || password ===undefined ) )
         {
-            return res.status(500).json({ success: `you cannot leave any field empty` ,status:500});
+            return res.status(403).json({ success: `you cannot leave any field empty` ,status:403});
         }
         const body = req.body;
         let myHeaders = new Headers();
         myHeaders.append("Accept", "application/json");
         myHeaders.append("Content-Type", "application/json");
         let raw = JSON.stringify({
-        "name": name,
-        "password": password
+            "name": name,
+            "password": password
         });
         let requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow'
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
         };
         let login_fetcher = await fetch(`${routes.LOGIN}`, requestOptions)
             .then(response => response.json())
@@ -44,6 +45,7 @@ export default async (req,res)=>{
             }
         )
         res.setHeader('set-Cookie', httpOnlyCookie);
+        console.log( 'cookie:',res.getHeader('set-Cookie') )
         return res.status(200).json({
             username:login_fetcher?.username,
             success: 'logged in successfully',

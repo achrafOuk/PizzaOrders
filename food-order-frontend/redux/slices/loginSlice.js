@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-
 const initialState = {
   username: "",
 };
@@ -10,7 +9,7 @@ const loginSlice = createSlice({
     setLogin: (state, action) => {
       console.log("login:", action.payload); state.username = action.payload.username;
     },
-    setLogout: (state, action) => {
+    setLogout: (state) => {
       state.username = "";
     },
   },

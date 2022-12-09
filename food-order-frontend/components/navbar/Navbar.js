@@ -1,19 +1,9 @@
 import Link from "next/link";
-import Counter from "./Counter";
-import NavLink from "./navLink";
-import ToggleButton from "./ToggleButton";
-import styles from "../../styles/Navbar.module.css";
 import { useSelector } from "react-redux";
-import Unautorized from "./Unautorized";
-import Autorized from "./Autorized";
 export default function Navbar() {
   const quantity = 0;
-  const items_counter = useSelector(
-    (state) => state?.reducers.order?.order.items_counter
-  );
-  const username = useSelector(
-    (state) => state?.reducers.order?.login.username
-  );
+  const items_counter = useSelector( (state) => state?.reducers.order?.order.items_counter );
+  const username = useSelector( (state) => state?.reducers.order?.login.username);
   console.log("username:", username);
   if (username !== "") {
     return <></>;

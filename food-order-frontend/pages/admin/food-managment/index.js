@@ -70,9 +70,10 @@ export default function food_mangment({ pizzaList, pages_counter }) {
 export async function getServerSideProps(context) {
   // Fetch data from external API
   let current_page = context.query?.page ?? 1;
-  let requestOptions = {
-    method: "GET",
-  };
+  const cookies = context.req.headers.cookie;
+  console.log('cookies:',cookies);
+  console.log('****************');
+  let requestOptions = { method: "GET", };
   let res = await fetch(`${routes.FOODS}?page=${current_page}`, requestOptions);
   let response = await res.json();
   let pizzaList = response.response.data;

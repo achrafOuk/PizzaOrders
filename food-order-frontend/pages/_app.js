@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }) {
     <>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <div className="flex flex-col justify-between min-h-screen">
+          <div className="flex flex-col justify-between h-screen">
             <Navbar></Navbar>
             <Component {...pageProps} />
             <Footer></Footer>
