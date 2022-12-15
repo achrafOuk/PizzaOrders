@@ -26,7 +26,6 @@ class UserController extends Controller
         ]);
         if(!auth()->attempt($request->only('password', 'name')) ){
             return response()->json([ 'response'=>'Username or password are wrong'],500);
-
         }
         // $user = User::find("63212b2fba02000054004a33");
         $username =$request->name; 

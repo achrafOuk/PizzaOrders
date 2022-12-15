@@ -69,12 +69,12 @@ export default function OrderTable({ orders, currentPage ,user_token, isUserAuth
                   <td className="px-4 py-3">
                     <div className="flex items-center space-x-4 text-sm">
                       <Button
-                        buttonClass="bg-purple-600 hover:bg-purple-900 text-white font-bold py-2 px-4 rounded"
+                        buttonClass="bg-blue-600 hover:bg-purple-900 text-white font-bold py-2 px-4 rounded"
                         buttonText="Shows details"
                       ></Button>
                       {order.status !== "delivered" ? (
                         <Button
-                          buttonClass="bg-purple-600 hover:bg-purple-900 text-white font-bold py-2 px-4 rounded"
+                          buttonClass="bg-blue-600 hover:bg-purple-900 text-white font-bold py-2 px-4 rounded"
                           buttonText="Next stage"
                           onClick={() => {
                             console.log(order?.id);
@@ -83,7 +83,7 @@ export default function OrderTable({ orders, currentPage ,user_token, isUserAuth
                         ></Button>
                       ) : (
                         <Button
-                          buttonClass="bg-purple-600 hover:bg-purple-900 text-white font-bold py-2 px-4 rounded"
+                          buttonClass="bg-blue-600 hover:bg-purple-900 text-white font-bold py-2 px-4 rounded"
                           buttonText="Next stage"
                           disabled
                         ></Button>

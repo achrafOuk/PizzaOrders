@@ -1,6 +1,8 @@
 import { serialize,cookie } from "cookie";
 import { routes } from "../../../routes";
 export default async (req,res)=>{
+    console.log('cookies from orders api:',req?.cookies?.access_token);
+    console.log('cookies from orders api:',req?.headers.cookies?.access_token);
     let cookies = req.headers?.access_token;
     cookies = cookies?.split('=')[1];
     if ( req.method === 'GET' )

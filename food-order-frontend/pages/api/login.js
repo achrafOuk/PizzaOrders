@@ -28,23 +28,23 @@ export default async (req,res)=>{
             redirect: 'follow'
         };
         let login_fetcher = await fetch(`${routes.LOGIN}`, requestOptions)
-            .then(response => response.json())
-            .catch(error => error);
-        console.log('login fetcher',login_fetcher?.response)
-        if( login_fetcher?.response === undefined )
+        console.log('login fetcher',login_fetcher?.status)
+        if( login_fetcher?.status !== 200 )
         {
             return res.status(500).json({
                 success: 'credentials are wrong',
                 status:500
             });
         }
+        login_fetcher = await login_fetcher.json();
+        console.log(login_fetcher?.access_token)
+
         let httpOnlyCookie = serialize(
             'access_token', login_fetcher?.access_token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV !== 'development',
                 maxAge: 60 * 60 * 3,
                 sameSite: 'strict',
-                //domain:host,
                 path: '/'
             }
         )

@@ -1,18 +1,17 @@
 import { NextResponse } from "next/server";
-import Cookies from 'js-cookie'
 export function middleware(request,response)
 {
   // check if url is start with admin
   let isDashboardRoute =  request.nextUrl.pathname.startsWith('/admin');
   // check is user is authentificated
   let {cookies}= request;
-  let host = request.headers.host
   console.log('////////////////////')
-  console.log('cookies:',request.cookies )
-  console.log('cookies:',request.headers.cookies )
-  console.log('cookies:',Cookies.get('user_token') )
+  console.log('middleware :',cookies)
+  console.log('middleware :',cookies?.access_token )
+  console.log('middleware :', cookies.get('access_token') )
   console.log('////////////////////')
-  let isUserAuth = cookies.get('access_token') !== undefined ? true: false;
+  let isUserAuth = cookies.get('access_token') != null ;
+  console.log('is auth',isUserAuth)
   if( isDashboardRoute && isUserAuth ) 
   { 
     return NextResponse.next();
@@ -35,3 +34,4 @@ export function middleware(request,response)
 export const config = {
   matcher: ['/','/pizza/:path*','/admin/:path*','/login','/cart']
 }
+

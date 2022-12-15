@@ -4,7 +4,7 @@ export default function FoodCart({ id, title, price, description, image }) {
     <>
       <div className="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md ">
         <img
-          className="rounded-t-lg"
+          className="rounded-t-lg w-full"
           src={image}
           alt=""
         />
