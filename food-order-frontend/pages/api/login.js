@@ -1,7 +1,10 @@
 import { serialize } from "cookie";
 import { routes } from "../../routes";
+import Cookies from 'js-cookie'
 
 export default async (req,res)=>{
+
+    let host = req.headers.host
     if (req.method === 'POST')
     {
         const {name,password } = req.body;
@@ -41,14 +44,15 @@ export default async (req,res)=>{
                 secure: process.env.NODE_ENV !== 'development',
                 maxAge: 60 * 60 * 3,
                 sameSite: 'strict',
+                //domain:host,
                 path: '/'
             }
         )
+        Cookies.set('user_token', login_fetcher?.access_token, { expires: 60*60*3 });
         res.setHeader('set-Cookie', httpOnlyCookie);
-        console.log( 'cookie:',res.getHeader('set-Cookie') )
         return res.status(200).json({
             username:login_fetcher?.username,
-            success: 'logged in successfully',
+            success:'logged in successfully',
             status:200
         });
     }

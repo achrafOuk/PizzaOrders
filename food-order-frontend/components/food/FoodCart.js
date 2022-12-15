@@ -5,7 +5,7 @@ export default function FoodCart({ id, title, price, description, image }) {
       <div className="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md ">
         <img
           className="rounded-t-lg"
-          src="https://github.com/safak/youtube/blob/next-food-ordering-app/public/img/pizza.png?raw=true"
+          src={image}
           alt=""
         />
         <div className="p-5">

@@ -5,8 +5,6 @@ export default async (req,res)=>{
     cookies = cookies?.split('=')[1];
     if ( req.method === 'GET' )
     {
-        console.log('cookie:', cookies );
-        console.log('--------------------');
         if( cookies ===undefined )
         {
             res.setHeader('set-Cookie',[
@@ -34,8 +32,6 @@ export default async (req,res)=>{
             let orders = await fetch(`${routes.ORDER}`, requestOptions)
             .then(response => response.json())
             .catch(error => console.log(error));
-            console.log(orders)
-            console.log('status',orders?.status)
             if (orders?.status !== 200)
             {
                 return res.status(403).json({ error: 'something went wrong' });

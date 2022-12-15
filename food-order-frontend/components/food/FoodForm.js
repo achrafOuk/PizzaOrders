@@ -37,7 +37,7 @@ export default function FoodForm({ id, title, price, handle, mainImg }) {
           <label className="text-gray-500 text-base">Qty.</label>
           <input
             type="number"
-            inputmMode="numeric"
+            inputMode="numeric"
             id="quantity"
             name="quantity"
             min="1"
@@ -49,7 +49,7 @@ export default function FoodForm({ id, title, price, handle, mainImg }) {
         </div>
       </div>
       <Button
-        buttonClass="pt-3 pb-2 bg-purple-600 text-white w-full mt-2 rounded-sm font-primary font-semibold text-xl flex justify-center items-baseline  hover:bg-palette-dark"
+        buttonClass="pt-3 pb-2 bg-blue-600 text-white w-full mt-2 rounded-sm font-primary font-semibold text-xl flex justify-center items-baseline  hover:bg-palette-dark"
         buttonText="Add to cart"
         onClick={handleAddToCart}
       ></Button>

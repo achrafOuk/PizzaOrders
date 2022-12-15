@@ -2,22 +2,20 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { remove, update } from "../../redux/slices/orderSlice";
 function update_item_in_cart(dispatch, product, new_value) {
-  let data = {
-    order: product,
-    quantity: new_value,
-  };
+  let data = { order: product, quantity: new_value, };
   dispatch(update(data));
 }
 
 export default function FoodItem({ product }) {
   console.log("product:", product);
+  console.log("image:", product?.image);
   const dispatch = useDispatch();
   let [quantity, setQuantity] = useState(product.quantity);
   return (
     <tr className="text-sm sm:text-base text-gray-600 text-center">
       <td className="font-primary font-medium px-4 sm:px-6 py-4 flex items-center">
         <img
-          src="https://github.com/safak/youtube/blob/next-food-ordering-app/public/img/pizza.png?raw=true"
+          src={product?.image}
           alt="fashion-dog"
           height="64"
           width="64"
@@ -33,7 +31,7 @@ export default function FoodItem({ product }) {
       <td className="font-primary font-medium px-4 sm:px-6 py-4">
         <input
           type="number"
-          inputmMode="numeric"
+          inputMode="numeric"
           id="variant-quantity"
           name="variant-quantity"
           min="1"

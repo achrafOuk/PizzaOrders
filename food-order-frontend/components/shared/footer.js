@@ -8,7 +8,7 @@ function Footer() {
     return <></>;
   }*/
   return (
-    <footer className="mt-[5%] text-white bg-purple-600 py-4 flex justify-center font-primary items-center">
+    <footer className="mt-[5%] text-white bg-blue-600 py-4 flex justify-center font-primary items-center">
       Created by
       <a
         href="https://twitter.com/deepwhitman"

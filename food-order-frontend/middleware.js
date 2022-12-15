@@ -1,12 +1,16 @@
 import { NextResponse } from "next/server";
+import Cookies from 'js-cookie'
 export function middleware(request,response)
 {
   // check if url is start with admin
   let isDashboardRoute =  request.nextUrl.pathname.startsWith('/admin');
   // check is user is authentificated
   let {cookies}= request;
+  let host = request.headers.host
   console.log('////////////////////')
-  console.log('middleware :',cookies)
+  console.log('cookies:',request.cookies )
+  console.log('cookies:',request.headers.cookies )
+  console.log('cookies:',Cookies.get('user_token') )
   console.log('////////////////////')
   let isUserAuth = cookies.get('access_token') !== undefined ? true: false;
   if( isDashboardRoute && isUserAuth ) 

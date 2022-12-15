@@ -9,7 +9,7 @@ export default function Item({ page, currentPage, url, setPage, lastPage }) {
     return (
       <li>
         <a
-          className="bg-purple-600 text-white py-2 px-3 leading-tight bg-white border border-gray-300"
+          className="bg-blue-600 text-white py-2 px-3 leading-tight bg-white border border-gray-300"
           style={{ cursor: "default" }}
         >
           {page}

@@ -45,7 +45,7 @@ export default function OrderTable({ orders, currentPage ,user_token, isUserAuth
         <div className="w-full overflow-x-auto">
           <table className="w-full whitespace-no-wrap">
             <thead>
-              <tr className="bg-purple-600 text-xs font-semibold tracking-wide text-left text-white uppercase border-b ">
+              <tr className="bg-blue-600 text-xs font-semibold tracking-wide text-left text-white uppercase border-b ">
                 {columns.map((col, id) => (
                   <th key={id} className="px-4 py-3">
                     {col}
@@ -106,3 +106,4 @@ export default function OrderTable({ orders, currentPage ,user_token, isUserAuth
     </div>
   );
 }
+

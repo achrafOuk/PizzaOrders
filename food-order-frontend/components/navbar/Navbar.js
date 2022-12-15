@@ -11,7 +11,7 @@ export default function Navbar() {
   return (
     <nav
       id="header"
-      className="text-white bg-purple-600 w-full z-30 top-0 py-1"
+      className="text-white bg-blue-600 w-full z-30 top-0 py-1"
     >
       <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-6 py-3">
         <label htmlFor="menu-toggle" className="cursor-pointer md:hidden block">
@@ -32,7 +32,7 @@ export default function Navbar() {
           className="hidden md:flex md:items-center md:w-auto w-full order-3 md:order-1"
           id="menu"
         >
-          <nav className="bg-purple-600">
+          <nav className="bg-blue-600">
             <ul className="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0">
               <li>
                 <div className="text-white inline-block no-underline">

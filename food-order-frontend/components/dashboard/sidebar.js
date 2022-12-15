@@ -10,8 +10,8 @@ export default function AdminSidebar() {
   let router = useRouter();
   let distach = useDispatch();
   return (
-    <header className="z-10 py-4 bg-white shadow-md ">
-      <div className="container flex items-center justify-between h-full px-6 mx-auto text-purple-600 ">
+    <header className="z-10 py-4 bg-white shadow-md bg-blue-600">
+      <div className="container flex items-center justify-between h-full px-6 mx-auto text-white ">
         <button
           className="p-1 mr-5 -ml-1 rounded-md md:hidden focus:outline-none focus:shadow-outline-purple"
           aria-label="Menu"
@@ -30,7 +30,7 @@ export default function AdminSidebar() {
           </svg>
         </button>
         <div className="flex justify-center flex-1 lg:mr-32">
-          <div className="relative w-full max-w-xl mr-6 focus-within:text-purple-500">
+          <div className="relative w-full max-w-xl mr-6 focus-within:text-blue-500">
             <div className="absolute inset-y-0 flex items-center pl-2"></div>
           </div>
         </div>

@@ -34,7 +34,7 @@ export default function AdminTable({ pizzaList,setPizzaList}) {
   return (
     <div className="mt-[5%] container grid px-6 mx-auto">
       <div className="w-full overflow-hidden rounded-lg shadow-xs">
-        <button className="flex items-center justify-between w-40 px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple mb-[5%]">
+        <button className="flex items-center justify-between w-40 px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-purple mb-[5%]">
           <Link href="/admin/food-managment/add">Create new food</Link>
           <span className="ml-2" aria-hidden="true">
             +
@@ -43,7 +43,7 @@ export default function AdminTable({ pizzaList,setPizzaList}) {
         <div className="w-full overflow-x-auto">
           <table className="w-full whitespace-no-wrap">
             <thead>
-              <tr className="bg-purple-600 text-xs font-semibold tracking-wide text-left text-white uppercase border-b ">
+              <tr className="bg-blue-600 text-xs font-semibold tracking-wide text-left text-white uppercase border-b ">
                 {columns.map((col, id) => (
                   <th key={id} className="px-4 py-3">
                     {col}
@@ -82,7 +82,7 @@ export default function AdminTable({ pizzaList,setPizzaList}) {
                   <td className="px-4 py-3">
                     <div className="flex items-center space-x-4 text-sm">
                       <button
-                        className="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg  focus:outline-none focus:shadow-outline-gray"
+                        className="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg  focus:outline-none focus:shadow-outline-gray"
                         aria-label="Edit"
                         onClick={() => {
                           route.push(`/admin/food-managment/edit/${pizza.id}`);
@@ -98,7 +98,7 @@ export default function AdminTable({ pizzaList,setPizzaList}) {
                         </svg>
                       </button>
                       <button
-                        className="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg  focus:outline-none focus:shadow-outline-gray"
+                        className="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg  focus:outline-none focus:shadow-outline-gray"
                         aria-label="Delete"
                         onClick={async ()=>{
                           delete_food(user_token,pizza.id)

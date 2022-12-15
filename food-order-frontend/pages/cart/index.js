@@ -50,7 +50,7 @@ export default function cart() {
 
           <Button
             buttonText="Check Out"
-            buttonClass="bg-purple-600 text-white text-lg font-primary font-semibold pt-2 pb-1 leading-relaxed flex  justify-center items-center focus:ring-1 focus:ring-palette-light focus:outline-none w-full hover:bg-palette-dark rounded-sm"
+            buttonClass="bg-blue-600 text-white text-lg font-primary font-semibold pt-2 pb-1 leading-relaxed flex  justify-center items-center focus:ring-1 focus:ring-palette-light focus:outline-none w-full hover:bg-palette-dark rounded-sm"
           ></Button>
         </div>
       </div>

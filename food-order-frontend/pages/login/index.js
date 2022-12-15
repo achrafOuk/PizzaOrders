@@ -106,13 +106,13 @@ export default function login() {
                 <Button
                   buttonType="submit"
                   buttonText="Sign in"
-                  buttonClass="w-full text-white bg-purple-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                  buttonClass="w-full text-white bg-blue-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 ></Button>
               ) : (
                 <Button
                   buttonType="submit"
                   buttonText="Sign in"
-                  buttonClass="w-full text-white bg-purple-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center opacity-50"
+                  buttonClass="w-full text-white bg-blue-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center opacity-50"
                   disabled={true}
                 ></Button>
               )}
