@@ -43,12 +43,12 @@ export default async (req,res)=>{
             'access_token', login_fetcher?.access_token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV !== 'development',
-                maxAge: 60 * 60 * 3,
+                maxAge: 24 *60* 60 * 3,
                 sameSite: 'strict',
                 path: '/'
             }
         )
-        Cookies.set('user_token', login_fetcher?.access_token, { expires: 60*60*3 });
+        //Cookies.set('user_token', login_fetcher?.access_token, { expires: 60*60*3 });
         res.setHeader('set-Cookie', httpOnlyCookie);
         return res.status(200).json({
             username:login_fetcher?.username,

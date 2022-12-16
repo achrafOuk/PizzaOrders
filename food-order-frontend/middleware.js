@@ -6,12 +6,13 @@ export function middleware(request,response)
   // check is user is authentificated
   let {cookies}= request;
   console.log('////////////////////')
-  console.log('middleware :',cookies)
-  console.log('middleware :',cookies?.access_token )
+  console.log('middleware :', cookies )
+  console.log('middleware :', cookies.access_token )
   console.log('middleware :', cookies.get('access_token') )
   console.log('////////////////////')
-  let isUserAuth = cookies.get('access_token') != null ;
-  console.log('is auth',isUserAuth)
+  let isUserAuth =  cookies?.get('access_token')?.length > 50 ?? false;
+  //console.log( cookies.get('access_token').length > 50   );
+  //console.log('is auth',cookies.get('access_token') ,typeof( cookies.get('access_token') ),isUserAuth)
   if( isDashboardRoute && isUserAuth ) 
   { 
     return NextResponse.next();

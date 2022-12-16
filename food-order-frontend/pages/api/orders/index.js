@@ -1,13 +1,16 @@
 import { serialize,cookie } from "cookie";
 import { routes } from "../../../routes";
 export default async (req,res)=>{
-    console.log('cookies from orders api:',req?.cookies?.access_token);
-    console.log('cookies from orders api:',req?.headers.cookies?.access_token);
+    console.log('---------------')
+    //let cookies = req?.cookies?.access_token;
     let cookies = req.headers?.access_token;
     cookies = cookies?.split('=')[1];
+    console.log('cookies from orders api:',cookies);
+    console.log('---------------')
+    let currentPage = req.query?.currentPage ?? 1;
     if ( req.method === 'GET' )
     {
-        if( cookies ===undefined )
+        if( cookies ===undefined || cookies===null )
         {
             res.setHeader('set-Cookie',[
                 serialize(
@@ -31,13 +34,15 @@ export default async (req,res)=>{
                 headers: myHeaders,
                 redirect: 'follow'
             };
-            let orders = await fetch(`${routes.ORDER}`, requestOptions)
-            .then(response => response.json())
-            .catch(error => console.log(error));
+            let orders = await fetch(`${routes.ORDER}?page=${currentPage}`, requestOptions)
+            console.log( orders?.status );
             if (orders?.status !== 200)
             {
                 return res.status(403).json({ error: 'something went wrong' });
             }
+            orders = await orders.json();
+            console.log('orders from server',orders);
+            return res.status(200).json({data:orders});
         }
     }
     else{

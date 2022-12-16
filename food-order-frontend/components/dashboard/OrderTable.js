@@ -21,14 +21,13 @@ export default function OrderTable({ orders, currentPage ,user_token, isUserAuth
       orders_clones[order_id].status = status[order_status+1];
     }
     setOrders(orders_clones);
-    let myHeaders = new Headers();
-    myHeaders.append("Authorization", `Bearer ${user_token}`);
+    /*let myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${user_token}`);*/
     let requestOptions = {
       method: "POST",
-      headers: myHeaders,
-      redirect: "follow",
+      //headers: myHeaders,
     };
-    await fetch(`${routes.NEXT_ORDER_STATUS}/${id}`, requestOptions);
+    await fetch(`/api/orders/update/${id}`, requestOptions);
     
   } 
   let columns = ["id", "customer name", "status", "price", "address"];
@@ -69,12 +68,12 @@ export default function OrderTable({ orders, currentPage ,user_token, isUserAuth
                   <td className="px-4 py-3">
                     <div className="flex items-center space-x-4 text-sm">
                       <Button
-                        buttonClass="bg-blue-600 hover:bg-purple-900 text-white font-bold py-2 px-4 rounded"
+                        buttonClass="bg-blue-600 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded"
                         buttonText="Shows details"
                       ></Button>
                       {order.status !== "delivered" ? (
                         <Button
-                          buttonClass="bg-blue-600 hover:bg-purple-900 text-white font-bold py-2 px-4 rounded"
+                          buttonClass="bg-blue-600 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded"
                           buttonText="Next stage"
                           onClick={() => {
                             console.log(order?.id);
@@ -83,7 +82,7 @@ export default function OrderTable({ orders, currentPage ,user_token, isUserAuth
                         ></Button>
                       ) : (
                         <Button
-                          buttonClass="bg-blue-600 hover:bg-purple-900 text-white font-bold py-2 px-4 rounded"
+                          buttonClass="bg-blue-600 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded"
                           buttonText="Next stage"
                           disabled
                         ></Button>

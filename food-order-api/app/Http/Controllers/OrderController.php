@@ -61,7 +61,7 @@ class OrderController extends Controller
         $id = intval($id);
         $order = order::where('id','=',$id);
         if($order->count()==0){
-            return response()->json([ 'response'=>'order does not exists' ]);
+            return response()->json([ 'response'=>'order does not exists' ],404);
         }
         $status = ['payment','prepayring','on the way','delivered'];
         $order = $order->first();
@@ -69,13 +69,13 @@ class OrderController extends Controller
         $current_status_id = array_search($order_status,$status);
         if ($current_status_id+1==count($status))
         {
-            return response()->json([ 'response'=>'cannot update the status of the order' ]);
+            return response()->json([ 'response'=>'cannot update the status of the order' ],400);
         }
          $order->update([
             'status' => $status[$current_status_id+1] ,
          ]);
 
-        return response()->json([ 'response'=>'order status was updated' ]);
+        return response()->json([ 'response'=>'order status was updated' ],200);
     }
 }
 
