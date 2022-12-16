@@ -2,16 +2,12 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import AdminNavbar from "../../../../components/dashboard/navbar";
 import AdminSidebar from "../../../../components/dashboard/sidebar";
-import getToken from "../../../../hooks/login/getToken";
-import { routes } from "../../../../routes";
 
 export default function FoodElement() {
   let [name, useName] = useState();
   let [price, usePrie] = useState();
   let [description, useDescription] = useState();
   const [selectedImage, setSelectedImage] = useState(null);
-  let user_token = getToken();
-  console.log("user token:", user_token);
   let route = useRouter();
   function setPrice(price) {
     return parseFloat(price) !== NaN ? price : parseFloat(1);
@@ -22,38 +18,31 @@ export default function FoodElement() {
     formdata.append("food_name", name);
     formdata.append("food_price", price);
     formdata.append("food_description", description);
-    if (user_token !== null) {
-      formdata.append("Authorization", `Bearer ${user_token}`);
-    }
-    formdata.append(
-      "food_image",
-      selectedImage,
-      "/C:/Users/user/Documents/pizza.png"
-    );
+    formdata.append( "food_image", selectedImage, "/C:/Users/user/Documents/pizza.png");
     let requestOptions = {
       method: "POST",
       body: formdata,
+      //headers: myHeaders,
       redirect: "follow",
     };
-    await fetch(routes.ADD_FOOD, requestOptions)
-      .then((res) => {
-        route.push("/admin/food-managment/");
-        console.log(res);
-        return res;
-      })
-      .catch((err) => {
-        console.log(err);
-        return err;
-      });
+    let data = await fetch('/api/foods/add', requestOptions);
+    let request_status = data.status;
+    console.log( 'status',request_status);
+    if ( request_status === 200)
+    {
+      route.push("/admin/food-managment/");
+    }
+    else{
+    }
   }
   return (
-    <div className="flex h-screen bg-gray-50 ">
+    <div className=" mb-[25%] flex h-screen bg-gray-50" >
       <AdminNavbar></AdminNavbar>
-      <div className="flex flex-col flex-1 w-full">
+      <div className=" flex flex-col flex-1 w-full">
         <AdminSidebar></AdminSidebar>
         <form
           onSubmit={(event) => add_element(event)}
-          className="mt-[5%] h-full pb-16 overflow-y-auto"
+          className="mt-[5%] h-full pb-16 "
         >
           <div className="container px-6 mx-auto grid">
             <div className="mb-4">
@@ -66,7 +55,7 @@ export default function FoodElement() {
               {selectedImage && (
                 <div>
                   <img
-                    className="w-full"
+                    className="w-2/5"
                     alt="not fount"
                     width={"250px"}
                     src={URL.createObjectURL(selectedImage)}
@@ -136,10 +125,9 @@ export default function FoodElement() {
                 {description}
               </textarea>
             </div>
-
             <div className="flex items-center justify-between">
               <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
                 type="submit"
               >
                 Submit

@@ -2,7 +2,6 @@ import Head from "next/head";
 import FoodList from "../components/food/FoodList";
 import Pagination from "../components/pagination/pagination";
 import Seo from "../components/shared/seo";
-import { routes } from "../routes";
 import styles from "../styles/Home.module.css";
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
@@ -35,7 +34,7 @@ export async function getServerSideProps(context) {
   let requestOptions = {
     method: "GET",
   };
-  let res = await fetch(`${routes.FOODS}?page=${current_page}`, requestOptions);
+  let res = await fetch(`/api/foods?page=${current_page}`, requestOptions);
   let response = await res.json();
   let pizzaList = response.response.data;
   let pages_counter = response.response.last_page;

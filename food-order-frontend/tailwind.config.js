@@ -151,6 +151,9 @@ module.exports = {
           900: "#751a3d",
         },
       },
+      spacing :{
+        '25%': '25%',
+      }
     },
   },
   plugins: [],

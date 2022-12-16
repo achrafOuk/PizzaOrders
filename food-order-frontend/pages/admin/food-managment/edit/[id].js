@@ -61,7 +61,7 @@ export default function FoodElement({ pizza }) {
         <AdminSidebar></AdminSidebar>
         <form
           onSubmit={(event) => edit_element(event)}
-          className="mt-[5%] h-full pb-16 overflow-y-auto"
+          className="mt-[5%] h-full pb-16 "
         >
           <div className="container px-6 mx-auto grid">
             <div className="mb-4">
@@ -74,7 +74,7 @@ export default function FoodElement({ pizza }) {
               {selectedImage && typeof selectedImage === "string" && (
                 <div>
                   <img
-                    className="w-full"
+                    className="w-2/5"
                     alt="not fount"
                     width={"250px"}
                     src={selectedImage}

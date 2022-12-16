@@ -58,7 +58,7 @@ export async function getServerSideProps(context) {
   };
   let host = context.req.headers.host
   let currentPage = context.query.page;
-  let res = await fetch(`http://${host}/api/orders?currentPage=${currentPage}`,request);
+  let res = await fetch(`http://${host}/api/orders?page=${currentPage}`,request);
   //orders_api = await orders_api.json();
   res = await res.json();
   res = res?.data;

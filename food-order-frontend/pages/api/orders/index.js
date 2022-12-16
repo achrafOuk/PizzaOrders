@@ -7,7 +7,7 @@ export default async (req,res)=>{
     cookies = cookies?.split('=')[1];
     console.log('cookies from orders api:',cookies);
     console.log('---------------')
-    let currentPage = req.query?.currentPage ?? 1;
+    let currentPage = req.query?.page ?? 1;
     if ( req.method === 'GET' )
     {
         if( cookies ===undefined || cookies===null )

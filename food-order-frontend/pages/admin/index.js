@@ -2,7 +2,7 @@ import AdminNavbar from "../../components/dashboard/navbar";
 import AdminSidebar from "../../components/dashboard/sidebar";
 export default function Admin() {
   return (
-    <div className="flex h-screen bg-gray-50 ">
+    <div className="flex h-screen bg-gray-50 " >
       <AdminNavbar Link></AdminNavbar>
       <div className="flex flex-col flex-1 w-full">
         <AdminSidebar></AdminSidebar>

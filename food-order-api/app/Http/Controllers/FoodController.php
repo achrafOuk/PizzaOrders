@@ -17,7 +17,6 @@ class FoodController extends Controller
         return response()->json([
             'response'=>$pagination
         ]);
-
     }
     //store new element
     public function store(Request $request){
@@ -36,7 +35,7 @@ class FoodController extends Controller
             {
                 return response()->json([
                     'response'=>'food is already exists'
-                ]);
+                ],400);
             }
             //store images
             $filenameWithExt = $request->file('food_image')->getClientOriginalName();
@@ -51,11 +50,11 @@ class FoodController extends Controller
             ]);
             return response()->json([
                 'response'=>'food was added'
-            ],502);
+            ],300);
             
         }
         catch(excetption $e){
-            return response()->json([ 'response'=>'Error has occur' ]);
+            return response()->json([ 'response'=>'Error has occur' ],403);
         }
     }
     public function show($id){

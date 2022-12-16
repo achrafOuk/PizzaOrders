@@ -61,7 +61,7 @@ class OrderController extends Controller
         $id = intval($id);
         $order = order::where('id','=',$id);
         if($order->count()==0){
-            return response()->json([ 'response'=>'order does not exists' ],404);
+            return response()->json([ 'response'=>'order does not exists' ],400);
         }
         $status = ['payment','prepayring','on the way','delivered'];
         $order = $order->first();
