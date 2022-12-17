@@ -6,11 +6,11 @@ export default async (req,res)=>{
         let requestOptions = {
             method: 'GET',
         };
-        let current_page = query?.page ?? 1;
+        let current_page = req.query?.page ?? 1;
         let foods = await fetch(`${routes.FOODS}?page=${current_page}`, requestOptions)
         foods = await foods.json();
         console.log('order status:',foods);
-        return res.status(200).json({ message: orders.response });
+        return res.status(200).json({ response: foods });
     }
     else{
         return res.status(500).json({

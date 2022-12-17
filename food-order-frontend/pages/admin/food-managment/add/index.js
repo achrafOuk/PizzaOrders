@@ -14,16 +14,20 @@ export default function FoodElement() {
   }
   async function add_element(event) {
     event.preventDefault();
+    console.log(name)
+    console.log(price)
+    console.log(description)
     let formdata = new FormData();
     formdata.append("food_name", name);
     formdata.append("food_price", price);
     formdata.append("food_description", description);
     formdata.append( "food_image", selectedImage, "/C:/Users/user/Documents/pizza.png");
+    console.log('data',formdata);
+    let headers = {"Content-Type": "multipart/form-data"};
     let requestOptions = {
       method: "POST",
       body: formdata,
-      //headers: myHeaders,
-      redirect: "follow",
+      //headers:headers,
     };
     let data = await fetch('/api/foods/add', requestOptions);
     let request_status = data.status;
@@ -31,8 +35,6 @@ export default function FoodElement() {
     if ( request_status === 200)
     {
       route.push("/admin/food-managment/");
-    }
-    else{
     }
   }
   return (
@@ -61,7 +63,8 @@ export default function FoodElement() {
                     src={URL.createObjectURL(selectedImage)}
                   />
                   <br />
-                  <button onClick={() => setSelectedImage(null)}>Remove</button>
+                  <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
+                  onClick={() => setSelectedImage(null)}>Remove</button>
                 </div>
               )}
               <input

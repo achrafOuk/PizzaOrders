@@ -34,8 +34,11 @@ export async function getServerSideProps(context) {
   let requestOptions = {
     method: "GET",
   };
-  let res = await fetch(`/api/foods?page=${current_page}`, requestOptions);
+  const host = context.req.headers.host
+  let res = await fetch(`http://${host}/api/foods?page=${current_page}`, requestOptions);
   let response = await res.json();
+  response = response.response;
+  console.log('response::',response);
   let pizzaList = response.response.data;
   let pages_counter = response.response.last_page;
   return {

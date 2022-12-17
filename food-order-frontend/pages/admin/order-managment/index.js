@@ -56,7 +56,7 @@ export async function getServerSideProps(context) {
     redirect: 'follow',
     headers: headers,
   };
-  let host = context.req.headers.host
+  const host = context.req.headers.host
   let currentPage = context.query.page;
   let res = await fetch(`http://${host}/api/orders?page=${currentPage}`,request);
   //orders_api = await orders_api.json();

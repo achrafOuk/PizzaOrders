@@ -17,7 +17,6 @@ export default async function useLogin(event, username, password, setMessage) {
     name: username,
     password: password,
   });
-
   let requestOptions = {
     method: "POST",
     headers: myHeaders,
