@@ -18,7 +18,7 @@ export default function AdminTable({ pizzaList,setPizzaList}) {
         headers: myHeaders,
       };
       setPizzaList( pizzaList.filter((pizza)=>pizza.id!==id) );
-      await fetch(`${routes.DELETE_FOOD}/${id}`,requestOptions)
+      await fetch(`/api/delete/${id}`,requestOptions)
       .then(e=>console.log('delete pizza',id))
       .catch(err=>console.log('error:',err));
       //router.push('/admin/food-managment?page=1');
