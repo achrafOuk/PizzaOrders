@@ -50,7 +50,7 @@ class FoodController extends Controller
             ]);
             return response()->json([
                 'response'=>'food was added'
-            ],300);
+            ],200);
             
         }
         catch(excetption $e){

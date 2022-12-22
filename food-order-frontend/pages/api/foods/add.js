@@ -1,5 +1,8 @@
 import { routes } from "../../../routes";
 import formidable from 'formidable';
+import axios from "axios";
+let FormData = require('form-data');
+let fs = require('fs');
 // config api to use formidable for data parsing
 export const config = {
   api: {
@@ -8,25 +11,25 @@ export const config = {
 };
 async function saveFormData(user_token,fields, files) {
   // some images are printed here, some other no. 'data',data);
-    console.log('data')
-    let Headers = {
-        "Authorization": `Bearer ${user_token}`,
-        "Content-Type": "application/json",
-    }
-    let data = {
-        food_name: fields.food_name,
-        food_pirce: fields.food_price,
-        food_description: fields.food_description,
-        food_image: files.food_image,
+    let data = new FormData();
+    data.append('food_name', fields.food_name);
+    data.append('food_price', fields.food_price);
+    data.append('food_description', fields.food_description);
+    data.append('food_image', fs.createReadStream(files.food_image?.filepath));
+    let config = {
+        method: 'post',
+        url: `${routes.ADD_FOOD}`,
+        headers: { 'Authorization': `Bearer ${user_token}`, ...data.getHeaders() },
+        data : data
     };
-    console.log('data',data);
-    let requestOptions = { method: "POST", body: data, headers:Headers, };
-    console.log('fetching.....')
-    let response_data = await fetch(routes.ADD_FOOD, requestOptions)
-    .then(data=>data)
-    .catch(err=>{console.log('error:',err)})
-    console.log(response_data)
-    console.log(response_data?.status)
+    let response_data = await axios(config)
+    .then(function (response) {
+        return response;
+    })
+    .catch(function (error) {
+        console.log('error:',error);
+        return error
+    });
     return response_data?.status ?? 400;
     let response = await result.json()
     console.log('response:',response?.status)
@@ -71,29 +74,6 @@ export default async (req,res)=>{
             res.status(400).send({ status: "invalid submission" });
             return;
         }
-        /*try{
-            let myHeaders = new Headers();
-            myHeaders.append("Authorization", `Bearer ${cookies}`);
-            myHeaders.append("Content-Type", "application/json");
-            let data = {
-                food_name: food_name,
-                food_pirce: food_price,
-                food_description: food_description,
-                food_image: food_image,
-            };
-            let requestOptions = {
-            method: "POST",
-            body: data,
-            redirect: "follow",
-            };
-            let result = await fetch(routes.ADD_FOOD, requestOptions);
-            let response = await result.json()
-            return res.status(result.tatus).json({ response: response });
-        }
-        catch( err )
-        {
-            return res.status(500).json({ success: `an error has occured` });
-        }*/
     }
     else{
         return res.status(500).json({ success: `method ${req.method} is not supported` });
