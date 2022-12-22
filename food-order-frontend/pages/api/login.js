@@ -1,6 +1,5 @@
 import { serialize } from "cookie";
 import { routes } from "../../routes";
-import Cookies from 'js-cookie'
 
 export default async (req,res)=>{
 

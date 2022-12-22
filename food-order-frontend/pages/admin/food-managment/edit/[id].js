@@ -10,9 +10,7 @@ export default function FoodElement({ pizza }) {
   let [description, useDescription] = useState(pizza.food_description);
   let route = useRouter();
   let id = route.query["id"];
-  const [selectedImage, setSelectedImage] = useState(
-    `${routes.IMAGE}/${pizza.food_image}`
-  );
+  const [selectedImage, setSelectedImage] = useState(`${routes.IMAGE}/${pizza.food_image}`);
   console.log(`${routes.IMAGE}/${selectedImage}`);
   function setPrice(price) {
     price = parseFloat(price);
@@ -24,28 +22,24 @@ export default function FoodElement({ pizza }) {
     formdata.append("food_name", name);
     formdata.append("food_price", price);
     formdata.append("food_description", description);
-    console.log(
-      selectedImage,
-      selectedImage !== `${routes.IMAGE}/${pizza.food_image}`
-    );
+    console.log( selectedImage, selectedImage !== `${routes.IMAGE}/${pizza.food_image}`);
     if (typeof selectedImage === "object") {
       console.log(selectedImage);
       console.log(typeof selectedImage);
-      formdata.append(
-        "food_image",
-        selectedImage,
-        "/C:/Users/user/Documents/pizza.png"
-      );
+      formdata.append("food_image", selectedImage, "/C:/Users/user/Documents/pizza.png");
     }
     let requestOptions = {
       method: "POST",
       body: formdata,
       redirect: "follow",
     };
-    await fetch(`${routes.UPDATE_FOOD}/${id}`, requestOptions)
+    await fetch(`/api/foods/update/${id}`, requestOptions)
       .then((res) => {
-        route.push("/admin/food-managment/");
-        console.log(res);
+        if (res.status === 200 )
+        {
+          route.push("/admin/food-managment/");
+        }
+        console.log('response:',res);
         return res;
       })
       .catch((err) => {
