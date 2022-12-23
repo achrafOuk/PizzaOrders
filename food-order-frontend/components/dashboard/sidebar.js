@@ -52,19 +52,19 @@ export default function AdminSidebar() {
               {username}
             </button>
         { isUserDropDownShowed ?
-          <ul class="absolute right-0 w-56 p-2 mt-2 space-y-2 text-gray-600 bg-white border border-gray-100 rounded-md shadow-md " aria-label="submenu"> <li class="flex"> <a class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 " href="#">
-            <svg class="w-4 h-4 mr-3" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+          <ul className="absolute right-0 w-56 p-2 mt-2 space-y-2 text-gray-600 bg-white border border-gray-100 rounded-md shadow-md " aria-label="submenu"> <li className="flex"> <a className="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 " href="#">
+            <svg className="w-4 h-4 mr-3" aria-hidden="true" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
               <path d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
             </svg>
-            <span onClick={()=>{
-              console.log('on click')
-              let logout = useLogout();
-              if (logout === 'you are logged')
+            <span onClick={async ()=>{
+              console.log('on click');
+              let result = await fetch('/api/logout/');
+              if ( result.status === 200 )
               {
                 distach(setLogout());
                 router.push('/')
               }
-              }}>Log out</span>
+               }}>Log out</span>
           </a>
         </li>
       </ul>

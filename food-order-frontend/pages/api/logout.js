@@ -1,11 +1,10 @@
-import { cookie } from "cookie";
+import { serialize } from "cookie";
 import { routes } from "../../routes";
 export default async (req,res)=>{
     let {cookies} = req;
-    console.log('cookies:',cookies)
-    if (req.method === 'POST' )
+    if (req.method === 'GET' )
     {
-        if( cookie!==undefined)
+        if( cookies ===undefined )
         {
           return res.status(500).json({ error: 'you cannot logout' });
         }
@@ -13,37 +12,31 @@ export default async (req,res)=>{
         myHeaders.append("Authorization", `Bearer ${cookies?.access_token}`);
         myHeaders.append("Content-Type", "application/json");
         let requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        redirect: 'follow'
+            method: 'POST',
+            headers: myHeaders,
+            redirect: 'follow'
         };
-        let logout = await fetch(`${routes.LOGOUT}`, requestOptions)
-            .then(response => response.json())
-            .catch(error => error);
+        let logout = await fetch(`${routes.LOGOUT}`, requestOptions);
+        console.log(logout);
         if (logout?.status !== 200)
         {
           return res.status(404).json({
             error: 'something went wrong'
           });
         }
-        req.setHeader('set-Cookie',[
-            cookie.serialize(
+        res.setHeader('set-Cookie',[
+            serialize(
                 'access_token', null, {
                     httpOnly: true,
                     secure: process.env.NODE_ENV !== 'development',
-                    maxAge: 60 * 30,
                     sameSite: 'strict',
                     path: '/'
                 }
             ),
         ]);
-        return res.status(200).json({
-            success: 'logged out successfully'
-        });
+        return res.status(200).json({ success: 'logged out successfully' });
     }
     else{
-        return res.status(500).json({
-            success: `method ${req.method} is not supported`
-        });
+        return res.status(500).json({ success: `method ${req.method} is not supported` });
     }
 }
