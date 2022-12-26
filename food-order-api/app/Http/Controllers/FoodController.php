@@ -13,7 +13,7 @@ class FoodController extends Controller
     }*/
     public function index()
     {
-        $pagination = Food::query()->paginate(2);
+        $pagination = Food::query()->paginate(6);
         return response()->json([
             'response'=>$pagination
         ]);

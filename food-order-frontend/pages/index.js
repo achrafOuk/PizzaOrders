@@ -12,7 +12,7 @@ export default function Home({ pizzaList, pages_counter }) {
 
   return (
     <>
-      <Seo title="FoodOrderAPP"></Seo>
+      <Seo></Seo>
       <div className={styles.container}>
         <div className="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
           <FoodList FoodList={pizzaList}></FoodList>

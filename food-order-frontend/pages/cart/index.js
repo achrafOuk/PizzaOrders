@@ -18,7 +18,8 @@ export default function cart() {
           <table className="mx-auto">
             <thead>
               <tr className="uppercase text-xs sm:text-sm text-palette-primary border-b border-palette-light">
-                <th className="font-primary font-normal px-6 py-4">Product</th>
+                <th className="font-primary font-normal px-6 py-4">image</th>
+                <th className="font-primary font-normal px-6 py-4">name</th>
                 <th className="font-primary font-normal px-6 py-4">Quantity</th>
                 <th className="font-primary font-normal px-6 py-4 hidden sm:table-cell">
                   Price

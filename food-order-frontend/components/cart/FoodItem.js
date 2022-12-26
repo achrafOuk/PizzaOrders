@@ -21,13 +21,10 @@ export default function FoodItem({ product }) {
           width="64"
           className="hidden sm:inline-flex"
         />
-        <a
-          className="pt-1 hover:text-palette-dark"
-          href="/products/the-fashionista"
-        >
-          {product.name}
-        </a>
       </td>
+      <th className="pt-1 hover:text-palette-dark" href="/products/the-fashionista" >
+        {product.title}
+      </th>
       <td className="font-primary font-medium px-4 sm:px-6 py-4">
         <input
           type="number"
@@ -36,7 +33,7 @@ export default function FoodItem({ product }) {
           name="variant-quantity"
           min="1"
           step="1"
-          className="text-gray-900 form-input border border-gray-300 w-16 rounded-sm focus:border-palette-light focus:ring-palette-light"
+          className="bg-white text-gray-900 form-input border w-16 rounded-sm "
           value={quantity}
           onChange={(e) => {
             let Quantity = parseInt(e.target.value)

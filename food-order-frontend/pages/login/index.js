@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import Alert from "../../components/shared/alert";
 import Button from "../../components/shared/button";
+import Seo from "../../components/shared/seo";
 import useLogin from "../../hooks/login/useLogin";
 import { setLogin, setLogout } from "../../redux/slices/loginSlice";
 export default function login() {
@@ -16,6 +17,8 @@ export default function login() {
   },[])
   let route = useRouter();
   return (
+    <>
+    <Seo title={'login'}></Seo>
     <section className="bg-gray-50 ">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-full lg:py-0">
         <div className="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0 ">
@@ -44,6 +47,7 @@ export default function login() {
                 setLoading(false);
               }}
             >
+            <h2 className="text-center"><strong>Login to admin panel</strong></h2>
               <div>
                 <label
                   htmlFor="email"
@@ -121,5 +125,6 @@ export default function login() {
         </div>
       </div>
     </section>
+  </>
   );
 }
