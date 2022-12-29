@@ -38,7 +38,7 @@ export default function Navbar() {
         >
           <nav className="bg-blue-600">
             <ul className="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0">
-              <li class="mr-5">
+              <li className="mr-5">
                 <div className="text-white inline-block no-underline">
                   <Link href="/">
                     <a href="">Home</a>

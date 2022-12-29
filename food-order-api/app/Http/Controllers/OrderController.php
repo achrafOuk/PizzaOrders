@@ -17,14 +17,14 @@ class OrderController extends Controller
     }
     public function show($id)
     {
-        $id = intval($id);
-        $order = Order::where('id','=',$id);
-        if($order==NULL)
+        //$id = intval($id);
+        $order = Order::where('_id','=',$id);
+        if($order->count() == 0)
         {
-            return response()->json([ 'response'=>'order does not exists' ]);
+            return response()->json([ 'response'=>'order does not exists' ],404);
         }
         $order = $order->select('_id','customer','total','address','status')->first();
-        return response()->json($order);
+        return response()->json($order,203);
     }
     public function store(Request $request){
          $this->validate($request,[

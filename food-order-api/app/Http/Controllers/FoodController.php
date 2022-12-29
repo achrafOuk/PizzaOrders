@@ -60,7 +60,7 @@ class FoodController extends Controller
     public function show($id){
         $id = intval($id);
         $result = Food::where('id','=',$id);
-        if ($result==NULL) {
+        if ($result->count()==0) {
         return response()->json([ 'response'=>'pizza does not exists' ]); 
         }
         return $result->first();
@@ -112,7 +112,7 @@ class FoodController extends Controller
     //delete food
     public function destroy($id)
     {
-        $id = intval($id);
+        //$id = intval($id);
         $food = new Food;
         $food = $food::where('id','=',$id);
         if($food==NULL)

@@ -6,9 +6,11 @@ import { persistor } from "../redux/store";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import Footer from "../components/shared/footer";
+import Seo from "../components/shared/seo";
 function MyApp({ Component, pageProps }) {
   return (
     <>
+    <Seo></Seo>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <div className="bg-gray-50 flex flex-col justify-between h-screen">
