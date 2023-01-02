@@ -5,11 +5,6 @@ export function middleware(request,response)
   let isDashboardRoute =  request.nextUrl.pathname.startsWith('/admin');
   // check is user is authentificated
   let {cookies}= request;
-  console.log('////////////////////')
-  console.log('middleware :', cookies )
-  console.log('middleware :', cookies.access_token )
-  console.log('middleware :', cookies.get('access_token') )
-  console.log('////////////////////')
   let isUserAuth =  cookies?.get('access_token')?.length > 50 ?? false;
   //console.log( cookies.get('access_token').length > 50   );
   //console.log('is auth',cookies.get('access_token') ,typeof( cookies.get('access_token') ),isUserAuth)
@@ -33,6 +28,6 @@ export function middleware(request,response)
 }
 // define the routes where the middleware is applied
 export const config = {
-  matcher: ['/','/pizza/:path*','/admin/:path*','/login','/cart']
+  matcher: ['/','/fellow-order/:path*','/pizza/:path*','/admin/:path*','/login','/cart']
 }
 

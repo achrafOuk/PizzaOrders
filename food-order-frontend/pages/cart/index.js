@@ -1,13 +1,13 @@
 import { useSelector, useDispatch } from "react-redux";
 import FoodItems from "../../components/cart/FoodItems";
 import FoodTotal from "../../components/cart/FoodTotal";
+import PaypalButton from "../../components/cart/PaypalButton";
 import Button from "../../components/shared/button";
 import { clear } from "../../redux/slices/orderSlice";
 export default function cart() {
   //const counter = useSelector((state) => state?.counter?.value);
   const order = useSelector((state) => state?.reducers.order?.order?.order);
   const dispatch = useDispatch();
-  console.log("order:", order);
   return (
     <main>
       <div className="mt-[5%] container mx-auto mb-20">
@@ -45,14 +45,16 @@ export default function cart() {
         <div className="max-w-sm mx-auto space-y-4 px-2">
           <Button
             buttonText="Clear"
+            disabled={ ()=>{return }}
             buttonClass="bg-white text-black border border-indigo-599 text-lg font-primary font-semibold pt-2 pb-1 leading-relaxed flex justify-center items-center focus:ring-1 focus:ring-palette-light focus:outline-none w-full hover:bg-palette-dark rounded-sm"
             onClick={() => dispatch(clear())}
           ></Button>
 
-          <Button
+          {/*<Button
             buttonText="Check Out"
             buttonClass="bg-blue-600 text-white text-lg font-primary font-semibold pt-2 pb-1 leading-relaxed flex  justify-center items-center focus:ring-1 focus:ring-palette-light focus:outline-none w-full hover:bg-palette-dark rounded-sm"
-          ></Button>
+              ></Button>*/}
+          <PaypalButton></PaypalButton>
         </div>
       </div>
     </main>

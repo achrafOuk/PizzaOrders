@@ -1,10 +1,4 @@
-export default function Button({
-  buttonText,
-  buttonClass,
-  buttonType,
-  onClick,
-  disabled,
-}) {
+export default function Button({ buttonText, buttonClass, buttonType, onClick, disabled, }) {
   if (disabled) {
     return (
       <>
