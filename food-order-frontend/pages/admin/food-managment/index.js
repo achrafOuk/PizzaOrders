@@ -1,17 +1,17 @@
 import AdminNavbar from "../../../components/dashboard/navbar";
 import AdminSidebar from "../../../components/dashboard/sidebar";
 import AdminTable from "../../../components/dashboard/table";
-import { useEffect, useState} from "react";
+import { useEffect, } from "react";
 import Pagination from "../../../components/pagination/pagination";
 import { routes } from "../../../routes";
 import { useRouter } from "next/router";
 export default function food_mangment({ pizzaList, pages_counter }) {
   let router = useRouter();
   let page = router.query["page"] ?? 1;
-  let [currentPage, setCurrentPage] = useState(parseInt(page));
+  let [currentPage, setCurrentPage] = (parseInt(page));
   console.log('page counter from start',pages_counter);
-  let [PizzaList, setPizzaList] = useState(pizzaList);
-  let [PagesCounter, setPageCounter] = useState(pages_counter);
+  let [PizzaList, setPizzaList] = (pizzaList);
+  let [PagesCounter, setPageCounter] = (pages_counter);
   useEffect(() => {
     let current_page = async () => {
       setCurrentPage(page)

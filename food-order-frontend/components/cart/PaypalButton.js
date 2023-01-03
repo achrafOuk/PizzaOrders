@@ -1,19 +1,25 @@
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import { useSelector } from "react-redux";
-export default function PaypalButton (){
+import { PayPalScriptProvider} from "@paypal/react-paypal-js";
+import ButtonWrapper from "./ButtonWrapper";
 
-{/*<PayPalScriptProvider options={{}}>*/}
-  const total = useSelector((state) => state?.reducers.order?.order?.total);
-  const currency = 'USD';
-  let paypal_key = 'ATFBxUMhwLq18ggX-586Mp_GVp7eqTwzZcZa0w3fzI87TJTNFSSKfoip68SHNuwV7KlTFQYCh4c09bj7'
-const client = { 'client-id': paypal_key, };
-  const onSuccess = () =>{ console.log('the request is done'); }
-  const onError = () =>{ console.log('something went wrong'); }
-  const onCancel = () =>{ console.log('request cancled'); }
-  console.log('log',typeof(total));
-  return (
-    <PayPalScriptProvider options={{ "client-id":paypal_key,currency: "USD" }}>
-        <PayPalButtons style={{ layout: "horizontal" }} />
-    </PayPalScriptProvider>
-  )
+// This values are the props in the UI
+const amount = "2";
+const currency = "USD";
+
+// sb-3n47kn24607455@personal.example.com
+// &r.vL16O
+// Custom component to wrap the PayPalButtons and handle currency changes
+export default function App() {
+    let options = {
+        "client-id": "test",
+        components: "buttons",
+        currency: "USD",
+        "disable-funding": "card",
+    };
+	return (
+		<div >
+            <PayPalScriptProvider options={options}>
+				<ButtonWrapper currency={currency} showSpinner={false} />
+			</PayPalScriptProvider>
+		</div>
+	);
 }

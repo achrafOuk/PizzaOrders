@@ -1,13 +1,13 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import {  } from "react";
 import AdminNavbar from "../../../../components/dashboard/navbar";
 import AdminSidebar from "../../../../components/dashboard/sidebar";
 
 export default function FoodElement() {
-  let [name, useName] = useState();
-  let [price, usePrie] = useState();
-  let [description, useDescription] = useState();
-  const [selectedImage, setSelectedImage] = useState(null);
+  let [name, useName] = ();
+  let [price, usePrie] = ();
+  let [description, useDescription] = ();
+  const [selectedImage, setSelectedImage] = (null);
   let route = useRouter();
   function setPrice(price) {
     return parseFloat(price) !== NaN ? price : parseFloat(1);

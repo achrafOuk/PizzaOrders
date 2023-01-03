@@ -1,13 +1,16 @@
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import FoodItems from "../../components/cart/FoodItems";
 import FoodTotal from "../../components/cart/FoodTotal";
-import PaypalButton from "../../components/cart/PaypalButton";
+import PaymentModal from "../../components/cart/PaymentModal";
 import Button from "../../components/shared/button";
 import { clear } from "../../redux/slices/orderSlice";
 export default function cart() {
   //const counter = useSelector((state) => state?.counter?.value);
   const order = useSelector((state) => state?.reducers.order?.order?.order);
+  const total = useSelector((state) => state?.reducers.order?.order?.total);
   const dispatch = useDispatch();
+  let [showModal,setShowModal] = useState(false);
   return (
     <main>
       <div className="mt-[5%] container mx-auto mb-20">
@@ -50,11 +53,14 @@ export default function cart() {
             onClick={() => dispatch(clear())}
           ></Button>
 
-          {/*<Button
+          <Button
             buttonText="Check Out"
+            disabled={false}
+            onClick={()=>setShowModal((current)=>true)}
             buttonClass="bg-blue-600 text-white text-lg font-primary font-semibold pt-2 pb-1 leading-relaxed flex  justify-center items-center focus:ring-1 focus:ring-palette-light focus:outline-none w-full hover:bg-palette-dark rounded-sm"
-              ></Button>*/}
-          <PaypalButton></PaypalButton>
+              ></Button>
+            <PaymentModal showModal={showModal} setShowModal={()=>{setShowModal(current=>!current)}}></PaymentModal>
+          {/*<PaypalButton></PaypalButton>*/}
         </div>
       </div>
     </main>
