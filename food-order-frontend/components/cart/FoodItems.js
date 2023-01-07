@@ -5,7 +5,7 @@ export default function FoodItems({ products }) {
   return (
     <>
       {products.map((product) => (
-        <FoodItem product={product}></FoodItem>
+        <FoodItem key={product.id} product={product}></FoodItem>
       ))}
     </>
   );

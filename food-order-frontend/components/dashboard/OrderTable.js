@@ -7,8 +7,6 @@ import { useRouter } from "next/router";
 
 export default function OrderTable({ orders, currentPage ,user_token, isUserAuth}) {
   console.log(`Bearer ${user_token}`)
-  const dispatch = useDispatch()
-  let router = useRouter();
   async function next_stage( id, currentPage ) {
     let status = ['payment','prepayring','on the way','delivered'];
     if ( Orders === undefined ) { return;}

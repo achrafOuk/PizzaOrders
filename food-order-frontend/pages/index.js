@@ -5,6 +5,7 @@ import Seo from "../components/shared/seo";
 import styles from "../styles/Home.module.css";
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
+import Carousal from "../components/shared/carousal";
 export default function Home({ pizzaList, pages_counter }) {
   let router = useRouter();
   let page = router.query["page"] ?? 1;
@@ -13,6 +14,7 @@ export default function Home({ pizzaList, pages_counter }) {
   return (
     <>
       <Seo></Seo>
+      <Carousal></Carousal>
       <div className={styles.container}>
         <div className="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
           <FoodList FoodList={pizzaList}></FoodList>

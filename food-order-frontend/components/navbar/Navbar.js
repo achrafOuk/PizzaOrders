@@ -48,7 +48,7 @@ export default function Navbar() {
 
               <li>
                 <div className="text-white inline-block no-underline">
-                  <Link href="/">
+                  <Link href="/fellow-order">
                     <a href="">Fellow order</a>
                   </Link>
                 </div>

@@ -28,6 +28,6 @@ export function middleware(request,response)
 }
 // define the routes where the middleware is applied
 export const config = {
-  matcher: ['/','/fellow-order/:path*','/pizza/:path*','/admin/:path*','/login','/cart']
+  matcher: ['/','/fellow-order/:path*','/pizza/:path*','/admin/:path*','/login','/cart','/checkout']
 }
 

@@ -35,10 +35,12 @@ class OrderController extends Controller
         $count= Order::all()->count();
         $id = ( $count === 0 ) ? 1 : Order::all()->last()->id + 1;
         $orders = $request->input('order');
+        $orders = json_decode($orders, TRUE);
+        //return response()->json($orders,300);
         $total = 0;
         if(count($orders)==0)
         {
-            return response()->json([ 'response'=>'cannot checkout,the cart is empty' ]);
+            return response()->json([ 'response'=>'cannot checkout,the cart is empty',500]);
         }
         foreach($orders as $food)
         {
@@ -53,8 +55,8 @@ class OrderController extends Controller
             'total' => $total,
             'address'=>$request->input('address')
          ]);
-         $order_id =  $order->get()->first()->_id;
-        return response()->json([ 'response'=>'order was paid','id'=> $order_id ,'order'=>$order ]);
+         $order_id =  $order->_id;
+        return response()->json([ 'response'=>'order was paid','id'=> $order_id ,'order'=>$order ],200);
     }
 
     public function update_order_status($id){

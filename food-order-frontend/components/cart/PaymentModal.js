@@ -1,13 +1,19 @@
 import { useEffect, useState } from "react";
 import PaypalButton from "./PaypalButton";
-
+import { useSelector } from "react-redux";
 export default function PaymentModal({showModal,setShowModal}){
 
 const hideModalClass = "fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full";
 const showModalClass = 'fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full justify-center items-center flex';
-let [address,setAdress] = useState();
-let [nameClient,setNameClient] = useState();
+let [address,setAdress] = useState('');
+let [nameClient,setNameClient] = useState('');
 const modelClasse = showModal ? showModalClass : hideModalClass;
+const total = useSelector((state) => state?.reducers.order?.order?.total);
+let isCustomerNotEmpty = ( address!=='' && nameClient!=='' && total!==undefined);
+let customerData = {
+    'address':address,
+    'client':nameClient,
+}
 return(
     /* fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full justify-center items-center flex*/
     // fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full
@@ -23,14 +29,14 @@ return(
                     <form className="space-y-6" action="#">
                         <div>
                             <label htmlFor="nameCLient" className="block mb-2 text-sm font-medium text-gray-900 ">Your name</label>
-                            <input type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="John Doe" required/>
+                            <input type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="John Doe" required onChange={(e)=>{setNameClient(e.target.value)}}/>
                         </div>
 
                         <div>
                             <label htmlFor="address" className="block mb-2 text-sm font-medium text-gray-900 ">Your address</label>
-                            <input type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Adress" required/>
+                            <input type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Adress" required onChange={(e)=>{setAdress(e.target.value)}}/>
                         </div>
-                        <PaypalButton></PaypalButton>
+                        <PaypalButton isDisabled={!isCustomerNotEmpty} customerData={customerData}></PaypalButton>
                         {/*<button type="submit" className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Login to your account</button>*/}
                     </form>
                 </div>

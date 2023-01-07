@@ -7,7 +7,7 @@ export const routes = {
   DELETE_FOOD: `${process.env.NEXT_PUBLIC_API_ENVPOINT}/foods/delete`,
   LOGIN: `${process.env.NEXT_PUBLIC_API_ENVPOINT}/login`,
   LOGOUT: `${process.env.NEXT_PUBLIC_API_ENVPOINT}/logout`,
-  CHECKOUT: `${process.env.NEXT_PUBLIC_API_ENVPOINT}/register`,
+  CHECKOUT: `${process.env.NEXT_PUBLIC_API_ENVPOINT}/order/checkout`,
   IMAGE: `${process.env.NEXT_PUBLIC_API_ENVPOINT}/foods/image`,
   ORDER: `${process.env.NEXT_PUBLIC_API_ENVPOINT}/order`,
   ORDER_STATUS: `${process.env.NEXT_PUBLIC_API_ENVPOINT}/order/show-order`,

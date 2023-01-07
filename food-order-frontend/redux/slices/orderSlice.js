@@ -4,6 +4,7 @@ const initialState = {
   total: 0,
   order: [],
   items_counter: 0,
+  order_id :'',
 };
 function calcul_total(produts) {
   return produts.reduce(
@@ -48,6 +49,9 @@ export const orderSlice = createSlice({
       state.total = calcul_total(state.order);
       state.items_counter = calcul_items_counter(state.order);
     },
+    setOrderId: (state,action) => {
+      state.order_id = action.payload;
+    },
     clear: (state) => {
       state.order = [];
       state.total = 0;
@@ -56,7 +60,7 @@ export const orderSlice = createSlice({
   },
 });
 
-export const { add, remove, update, clear } = orderSlice.actions;
+export const { add, remove, update, clear, setOrderId} = orderSlice.actions;
 
 export const orderAction = orderSlice.actions;
 let orderReducer = orderSlice.reducer;

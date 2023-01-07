@@ -10,6 +10,7 @@ export default function cart() {
   const order = useSelector((state) => state?.reducers.order?.order?.order);
   const total = useSelector((state) => state?.reducers.order?.order?.total);
   const dispatch = useDispatch();
+  console.log('order:',order)
   let [showModal,setShowModal] = useState(false);
   return (
     <main>
@@ -48,19 +49,18 @@ export default function cart() {
         <div className="max-w-sm mx-auto space-y-4 px-2">
           <Button
             buttonText="Clear"
-            disabled={ ()=>{return }}
+            disabled={!total}
             buttonClass="bg-white text-black border border-indigo-599 text-lg font-primary font-semibold pt-2 pb-1 leading-relaxed flex justify-center items-center focus:ring-1 focus:ring-palette-light focus:outline-none w-full hover:bg-palette-dark rounded-sm"
             onClick={() => dispatch(clear())}
           ></Button>
 
           <Button
             buttonText="Check Out"
-            disabled={false}
+            disabled={!total}
             onClick={()=>setShowModal((current)=>true)}
             buttonClass="bg-blue-600 text-white text-lg font-primary font-semibold pt-2 pb-1 leading-relaxed flex  justify-center items-center focus:ring-1 focus:ring-palette-light focus:outline-none w-full hover:bg-palette-dark rounded-sm"
               ></Button>
-            <PaymentModal showModal={showModal} setShowModal={()=>{setShowModal(current=>!current)}}></PaymentModal>
-          {/*<PaypalButton></PaypalButton>*/}
+          <PaymentModal showModal={showModal} setShowModal={()=>{setShowModal(current=>!current)}}></PaymentModal>
         </div>
       </div>
     </main>
