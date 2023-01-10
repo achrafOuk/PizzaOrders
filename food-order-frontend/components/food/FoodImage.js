@@ -2,7 +2,6 @@ import { useState, useRef } from "react";
 import Image from "next/image";
 //import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
-
 function FoodImage({ src, alt }) {
   return (
     <div className="w-full md:w-1/2 max-w-md border border-palette-lighter bg-white rounded shadow-lg">

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import styles from "../../styles/Navbar.module.css";
 import { useSelector } from "react-redux";
+import Image from "next/image";
 export default function Counter() {
   const items_counter = useSelector(
     (state) => state?.reducers.order?.order.items_counter

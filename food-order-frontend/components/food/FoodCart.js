@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 export default function FoodCart({ id, title, price, description, image }) {
   return (

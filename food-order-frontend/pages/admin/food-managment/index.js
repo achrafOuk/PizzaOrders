@@ -5,13 +5,15 @@ import { useEffect, } from "react";
 import Pagination from "../../../components/pagination/pagination";
 import { routes } from "../../../routes";
 import { useRouter } from "next/router";
+import { useState } from "react";
 export default function food_mangment({ pizzaList, pages_counter }) {
   let router = useRouter();
   let page = router.query["page"] ?? 1;
-  let [currentPage, setCurrentPage] = (parseInt(page));
+  console.log('page',page);
+  let [currentPage, setCurrentPage] = useState(parseInt(page));
   console.log('page counter from start',pages_counter);
-  let [PizzaList, setPizzaList] = (pizzaList);
-  let [PagesCounter, setPageCounter] = (pages_counter);
+  let [PizzaList, setPizzaList] = useState(pizzaList);
+  let [PagesCounter, setPageCounter] = useState(pages_counter);
   useEffect(() => {
     let current_page = async () => {
       setCurrentPage(page)
@@ -50,11 +52,11 @@ export default function food_mangment({ pizzaList, pages_counter }) {
     fetch_pizzas();
   },[currentPage])
   return (
-    <div className="flex h-screen bg-gray-50 ">
+    <div className="flex h-full bg-gray-50 ">
       <AdminNavbar></AdminNavbar>
       <div className="flex flex-col flex-1 w-full">
         <AdminSidebar></AdminSidebar>
-        <main className="h-full overflow-y-auto">
+        <main className="h-full overflow-y-hidden">
           <AdminTable pizzaList={PizzaList} setPizzaList={setPizzaList}></AdminTable>
           <Pagination
             PageNumbers={PagesCounter}

@@ -1,13 +1,15 @@
+import Image from "next/image";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import {  } from "react";
 import AdminNavbar from "../../../../components/dashboard/navbar";
 import AdminSidebar from "../../../../components/dashboard/sidebar";
 
 export default function FoodElement() {
-  let [name, useName] = ();
-  let [price, usePrie] = ();
-  let [description, useDescription] = ();
-  const [selectedImage, setSelectedImage] = (null);
+  let [name, useName] = useState();
+  let [price, usePrie] = useState();
+  let [description, useDescription] = useState();
+  const [selectedImage, setSelectedImage] = useState(null);
   let route = useRouter();
   function setPrice(price) {
     return parseFloat(price) !== NaN ? price : parseFloat(1);
@@ -46,6 +48,7 @@ export default function FoodElement() {
           onSubmit={(event) => add_element(event)}
           className="mt-[5%] h-full pb-16 "
         >
+        <h1 className="ml-6 text-lg font-bold text-gray-800" style={{'fontSize':'1.5rem'}}>Add new food</h1>
           <div className="container px-6 mx-auto grid">
             <div className="mb-4">
               <label

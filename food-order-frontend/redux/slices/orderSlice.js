@@ -24,6 +24,7 @@ export const orderSlice = createSlice({
   reducers: {
     add: (state, action) => {
       //print(state);
+      console.log(state.order);
       state.order.push(action.payload);
       state.total = calcul_total(state.order);
       state.items_counter = calcul_items_counter(state.order);
@@ -37,7 +38,8 @@ export const orderSlice = createSlice({
     update: (state, actions) => {
       //get product id
       let product_id = actions.payload.order.id;
-      state.order = state.order.filter((product) => product.id !== product_id);
+      let card_products = state.order;
+      let item_id = state.order.findIndex((product) => product.id === product_id);
       let product = actions.payload.order;
       let quantity = actions.payload.quantity;
       product = {
@@ -45,7 +47,8 @@ export const orderSlice = createSlice({
         quantity: quantity,
         total: product.price * quantity,
       };
-      state.order.push(product);
+      card_products[item_id] = product;
+      state.order = card_products;
       state.total = calcul_total(state.order);
       state.items_counter = calcul_items_counter(state.order);
     },

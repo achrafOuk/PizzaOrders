@@ -4,9 +4,8 @@ import FoodImage from "../../../components/food/FoodImage";
 import { useRouter } from "next/router";
 import { routes } from "../../../routes";
 // FoodForm({ title, handle, variants, , mainImg, })
-export default function pizza({ pizza }) {
+export default function Pizza({ pizza }) {
   const router = useRouter();
-  console.log(router.query.id);
   const food_id = Number(router.query.id);
   return (
     <>

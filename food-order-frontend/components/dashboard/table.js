@@ -33,6 +33,7 @@ export default function AdminTable({ pizzaList,setPizzaList}) {
   
   return (
     <div className="mt-[5%] container grid px-6 mx-auto">
+      <h1 className="mb-[2%]" style={{fontSize:'1.5rem'}}><strong>Manage your food</strong></h1>
       <div className="w-full overflow-hidden rounded-lg shadow-xs">
         <button className="flex items-center justify-between w-40 px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-purple mb-[5%]">
           <Link href="/admin/food-managment/add">Create new food</Link>

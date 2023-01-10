@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { remove, update } from "../../redux/slices/orderSlice";

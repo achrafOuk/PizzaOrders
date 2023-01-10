@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import AdminNavbar from "../../../../components/dashboard/navbar";
@@ -49,7 +50,7 @@ export default function FoodElement({ pizza }) {
   }
 
   return (
-    <div className="flex h-screen bg-gray-50 ">
+    <div className="flex h-full bg-gray-50 ">
       <AdminNavbar></AdminNavbar>
       <div className="flex flex-col flex-1 w-full">
         <AdminSidebar></AdminSidebar>
@@ -57,6 +58,7 @@ export default function FoodElement({ pizza }) {
           onSubmit={(event) => edit_element(event)}
           className="mt-[5%] h-full pb-16 "
         >
+        <h1 className="ml-6 text-lg font-bold text-gray-800" style={{'fontSize':'1.5rem'}}>Edit the item</h1>
           <div className="container px-6 mx-auto grid">
             <div className="mb-4">
               <label

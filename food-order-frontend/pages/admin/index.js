@@ -6,7 +6,7 @@ export default function Admin() {
       <AdminNavbar Link></AdminNavbar>
       <div className="flex flex-col flex-1 w-full">
         <AdminSidebar></AdminSidebar>
-        <main className="h-full overflow-y-auto">
+        <main className="h-full overflow-y-auto" style={{overflowY: 'hidden', padding:'2%'}}>
           <div className="container px-6 mx-auto grid">
             <h2 className="my-6 text-2xl font-semibold text-gray-700 ">
               Dashboard
